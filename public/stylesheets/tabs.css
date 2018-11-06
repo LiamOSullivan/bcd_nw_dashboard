@@ -1,0 +1,79 @@
+.tab-content{
+    position: relative;
+}
+
+.tab-charts{
+    /* min-height: 340px; */
+}
+
+.tab-link{
+    display: block;
+    margin: 0 .5rem;
+    padding: .5rem 1rem;
+    font-size: .875rem;
+    border: 1px solid;
+    border-radius: 1.25rem;
+}
+
+.tab-link.active, .tab-link:hover, .tab-link:focus{
+    color: var(--white);
+    border-color: var(--vivid-cyan);
+    background: var(--vivid-cyan);
+}
+
+.tab-charts__row{
+    position: relative;
+}
+
+.tab-charts__row::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+/* .tab-charts__row::-webkit-scrollbar-thumb {
+    background: var(--vivid-cyan);
+    border-radius: 10px;
+} */
+
+.arrow-left{
+    position: absolute;
+    left: -70px;
+    top: 40%;
+    background: transparent;
+    height: 40px;
+    width: 50px;
+    transform: rotate(90deg);
+    border:none;
+}
+
+.arrow-right{
+    position: absolute;
+    right: -70px;
+    top: 40%;
+    background: transparent;
+    height: 40px;
+    width: 50px;
+    transform: rotate(-90deg);
+    border: none;
+}
+
+.icon-arrow{
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.arrow-left:focus, .arrow-right:focus{
+    outline: none;
+}
+
+@media (max-width: 768px){
+
+    .tab-charts__row{
+        position: relative;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+}

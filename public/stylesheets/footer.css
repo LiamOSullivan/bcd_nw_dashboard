@@ -1,0 +1,97 @@
+.copyright{
+    border-top: 1px solid #343a40;
+}
+
+.footer-nav{
+    margin: 16px 0;
+    border: none;
+}
+
+.footer-link{
+    color: #f8f8f8;
+}
+
+.sign-up .form-control{
+    line-height: 1.45;
+    color: #404040;
+    border: 1px solid #e1e1e1;
+    border-radius: .1875rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.sign-up button{
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: .75rem;
+    padding: .8rem .8rem;
+    line-height: 1.45;
+    color: #404040;
+    background-color: #f2f2f2;
+    border: 1px solid #e1e1e1;
+    border-radius: .1875rem;
+}
+
+.credit{
+    float: left;
+    margin: 0 45px 15px 0;
+    height: 29px;
+}
+
+.partner{
+    float: left;
+    margin: 20px 10px 20px 0;
+    max-width: 130px;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.partner img{
+    width: 100%;
+    transition:all;
+    opacity: .55;
+}
+
+.partner:hover img{
+    opacity: 1;
+}
+
+.partner.dcc{
+    max-width: 140px;
+}
+
+.partner.fcc{
+    max-width: 155px;
+}
+
+.partner.mu {
+    max-width: 140px;
+}
+
+.partner.sfi{
+    max-width: 120px;
+}
+
+.partner.sdcc{
+    max-width: 130px;
+    padding-top: 8px;
+}
+
+.partner.osi {
+    max-width: 110px;
+    padding-top: 15px;
+}
+
+.partner.cso {
+    max-width: 180px;
+    padding-top: 15px;
+}
+
+@media (min-width: 992px){
+    .footer-nav{
+        border-right: 1px solid #343a40;
+    }
+}

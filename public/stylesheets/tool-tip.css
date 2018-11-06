@@ -1,0 +1,62 @@
+.axis {
+  font: 10px sans-serif;
+}
+
+
+.line {
+  fill: none;
+  stroke-width: 2px;
+}
+
+.overlay, .overlay2 {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus-circles {
+  stroke-width: 2px;
+}
+  
+.focus_line {
+  stroke: #c4cdd5;
+  stroke-width: 1px;
+  /* stroke-dasharray: 5,5; */
+}
+
+.tool-tip {
+  position: absolute;
+  min-width: 240px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid rgb(210, 214, 223);
+  border-radius: 5x;
+  pointer-events: none;
+  display: none;
+  font-family: sans-serif;
+  font-size: .75rem;
+  line-height: 1.25rem;
+  color: #313131;
+  opacity: 1;
+}
+
+.tip-box{
+  opacity: 0.75;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  float: left;
+}
+
+.tooltip-body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+}
+
+.legend.active{
+  opacity: .25;
+}
+
+/* .tip-text{
+  line-height: 1.25rem;
+} */

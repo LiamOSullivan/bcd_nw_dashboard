@@ -1,0 +1,80 @@
+.card{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 150px;
+    word-wrap: break-word;
+    background-color: transparent;
+    background-clip: border-box;
+    border: 1px solid;
+    border-radius: .25rem;
+}
+
+.card__link{
+    color:#f8f8f8;
+}
+
+.card__link:hover{
+    text-decoration: none;
+}
+
+.card__link:hover .card, .card__link:focus .card{
+    background: #1d21244d;
+}
+
+.card__header{
+    padding: .75rem .5rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    font-size: .875rem;
+}
+
+.card__body{
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: .5rem;
+}
+
+.card__title{
+    margin-bottom: .75rem;
+}
+
+.card__text{
+
+}
+.card__icon{
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+}
+
+.card__svg{
+    color: var(--vivid-cyan);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card__g{
+    fill: currentColor;
+}
+
+/* border utilities classes, need to add these to a util.css*/
+.border-blue{
+border-color: var(--vivid-cyan);
+}
+
+.border-yellow{
+border-color: var(--yellow);
+}
+
+.border-red{
+border-color: var(--vivid-red);
+}
+
+.border-teal{
+border-color: var(--teal);
+}

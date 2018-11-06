@@ -1,0 +1,101 @@
+/* Icon Navigation Component */
+
+.icon-nav__item{
+    text-align: center;
+    display: block;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.icon-nav__link{
+    display: block;
+    border: none;
+}
+
+.q-mark {
+    width:20px;
+}
+
+.icon {
+    fill: none;
+    stroke: #ffffff;
+    stroke-linecap: round;
+    stroke-miterlimit: 10;
+    max-width: 36px;
+    max-height: 36px;
+}
+
+.icon--small{
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    stroke-width: 2px;
+    stroke:#d1d1d1cf;
+    float: left;
+    margin-right: 1rem;
+    margin-top: .25rem;
+}
+
+.icon__header{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.icon-nav__link--box{
+    display: block;
+    height: 150px;
+    padding: 1rem 0rem;
+    color:#f8f8f8;
+    border-radius: 6px;
+    /* background: #002035ab;
+    border: 1px solid #16c1f37a; */
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    transition-property: -webkit-box-shadow,-webkit-transform;
+    transition-property: box-shadow,transform;
+    transition-property: box-shadow,transform,-webkit-box-shadow,-webkit-transform;
+    transition-duration: .4s;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
+
+}
+
+.icon-nav__link--box:hover{
+    color: #ffffff;
+    border: 2px solid #16c1f37a;
+    box-shadow: 0 12px 30px 0 rgba(0,0,0,.2);
+    transition-property: -webkit-box-shadow,-webkit-transform;
+    transition-property: box-shadow,transform;
+    transition-property: box-shadow,transform,-webkit-box-shadow,-webkit-transform;
+    transition-duration: .6s;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
+    text-decoration: none;
+}
+
+.icon--box{
+    position: absolute;
+    left: 42%;
+    top: 20%;
+}
+
+.icon__circle{
+    width: 65px;
+    height: 65px;
+    margin: auto;
+    padding-top: 15px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #1CB5E0 0%, #036484 100%);
+}
+
+.icon__header--box{
+    text-transform: uppercase;
+}
+
+.icon__desc--box p {
+    color: #b1b1b1;
+    font-size: .875rem;
+}
+
+@media (min-width: 768px){
+    .icon-nav__item{
+        flex: 0 0 19.666667%;
+        max-width: 19.666667%;
+    }
+}

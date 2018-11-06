@@ -1,0 +1,47 @@
+include page-links.pug
+
+mixin nav-item(name, link)
+    li.side-menu__nav-item
+        a.side-menu__nav-link(href="/"+link)
+            +svg("","icon__"+link)(class="icon icon--small side-menu__icon")
+            span= name
+
+mixin nav-dropdown(name, link)
+    li.side-menu__nav-item.dropdown
+        a.side-menu__nav-link.dropdown__link(href="/"+link)
+            +svg("","icon__"+link)(class="icon icon--small side-menu__icon")
+            span= name
+        a.dropdown__toggle
+            +svg("","icon__arrow")(class="icon icon--small side-menu__icon")
+            span.sr-only Toggle Dropdown
+        .dropdown__menu
+            each val, key in subLinks
+                +dropdown-item(key, val, link) 
+        
+form(class="form-inline float-right search-box")
+    input(class="search-box__input" type="search" placeholder="Search" aria-label="Search")
+button.side-menu__toggler.side-menu__right.search__trigger
+    .menu-button
+        img(height='20px' width='20px' class="float-right" title="Click to open search box" src="../images/magnifying-glass.svg")
+
+button.side-menu__toggler.s-m__trigger.side-menu__left
+    .menu-button
+        .menu-button__bar.menu-button__bar--top 
+        .menu-button__bar.menu-button__bar--middle 
+        .menu-button__bar.menu-button__bar--bottom
+
+nav.side-menu
+        ul.side-menu__nav
+            each parent, key in sideLinks
+                if parent === 'themes'
+                  +nav-dropdown(key, parent)
+                else
+                    +nav-item(key, parent)
+        .side-menu__footer
+          a(href="https://dashboards.maynoothuniversity.ie/" target="_blank")
+            img.side-menu__img(src="../images/bcd-logo.png" alt="BCD-Logo")
+            p.side-menu__p.side-menu__p--top Building
+            p.side-menu__p City
+            p.side-menu__p Dashboards
+
+.side-menu__overlay.s-m__trigger

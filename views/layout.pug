@@ -1,0 +1,64 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(http-equiv='content-type' charset='text/html utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    meta(name='google-site-verification' content='rGwQFRYPMqN9vFb8PWU3GCe5NjV_7LHhjZw1XGN4Dno')
+    meta(name='keywords' content='')
+    meta(property='og:site_name' content='')
+    meta(property='og:title' content='')
+    meta(property='og:type' content='')
+    meta(property='og:url' content='')
+    meta(property='og:image' content='')
+    meta(property='og:description' content='')
+
+    title= title
+
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.min.css')
+    
+    link(rel='stylesheet', href='/stylesheets/landing-page.css')
+    link(rel='stylesheet', href='/stylesheets/bcd-root.css')
+    link(rel='stylesheet', href='/stylesheets/base-style.css')
+    link(rel='stylesheet', href='/stylesheets/type.css')
+    link(rel='stylesheet', href='/stylesheets/side-menu.css')
+    link(rel='stylesheet', href='/stylesheets/accordion.css')
+    link(rel='stylesheet', href='/stylesheets/scroll-progress.css')
+    link(rel='stylesheet', href='/stylesheets/icon-nav.css')
+    link(rel='stylesheet', href='/stylesheets/grid.css')
+    link(rel='stylesheet', href='/stylesheets/card.css')
+    link(rel='stylesheet', href='/stylesheets/footer.css')
+    link(rel='stylesheet', href='/stylesheets/toggle-button.css')
+    link(rel='stylesheet', href='/stylesheets/tool-tip.css')
+  
+  block head
+
+  body.page
+    include component/icons.pug
+    .page__root
+      include component/navbar.pug
+        
+      block navigation
+
+      include component/side-menu.pug
+      .bcd-container
+        main
+          //-add subnav.pug here if its the themes page
+          block content
+     
+    include component/footer.pug
+
+    //- include component/scroll-to-top.pug
+    
+    script(src='/javascripts/vendor/jquery/jquery.min.js')
+    script(src='/javascripts/vendor/popper.js/umd/popper.min.js')
+    script(src='/javascripts/vendor/bootstrap/js/bootstrap.min.js')
+    script(src='/javascripts/side-menu.js')
+    script(src='/javascripts/scrollprogress.js')
+    block scripts
+
+
+
