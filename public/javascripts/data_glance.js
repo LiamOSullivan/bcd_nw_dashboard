@@ -1,7 +1,10 @@
-const parseTime = d3.timeParse("%d/%m/%Y");
-const parseYear = d3.timeParse("%Y");
-const formatYear = d3.timeFormat("%Y");
-const breakPoint = 768;
+const parseTime = d3.timeParse("%d/%m/%Y"),
+    parseYear = d3.timeParse("%Y"),
+    formatYear = d3.timeFormat("%Y"),
+    parseMonth = d3.timeParse("%Y-%b"),
+    formatMonth = d3.timeFormat("%b-%y"),
+    breakPoint = 768,
+    getKeys = (d) => d.filter((e, p, a) => a.indexOf(e) === p);
 
 let locale = d3.formatLocale({
     "decimal": ".",
@@ -18,6 +21,7 @@ let locale = d3.formatLocale({
     "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   });
 
+
 //   d3.formatLocale(locale);
 
 function dataSets (data, columns){
@@ -31,355 +35,219 @@ function dataSets (data, columns){
 }
 
 Promise.all([
-    d3.csv("/data/Economy/QNQ22_2.csv"),
-    d3.csv("/data/Demographics/population.csv"),
-    d3.csv("data/Housing/houseComp.csv"),
+    d3.csv("/data/landing_page/population_Age.csv"),
+    d3.csv("data/landing_page/schools.csv"),
     d3.csv("data/Housing/propertyprices.csv"),
 ]).then( dataFiles => {
 
-    const economyData = dataFiles[0];
-    const demographicsData = dataFiles[1];
-    const houseCompData = dataFiles[2];
-    const priceList = dataFiles[3];
+    const population_Age = dataFiles[0],
+          houseCompData = dataFiles[1],
+          priceList = dataFiles[2],
 
-    const columnNames1 = economyData.columns.slice(3);
-    const columnNames2 = demographicsData.columns.slice(2);
-    const columnNames3 = houseCompData.columns.slice(1);
-    const columnNames4 = priceList.columns.slice(1);
+          popV = population_Age.columns.slice(3),
+          popDate = population_Age.columns[0],
+          popAgeK = population_Age.columns[2],
+          popAgeKs = getKeys(population_Age.map(o => o[popAgeK])),
+          popDCC = population_Age.filter( d => {
+            return d.region === "Donegal";
+          }),
+          popDCSDC = population_Age.filter( d => {
+            return d.region === "DCSDC";
+          }),
 
-    const empValue = columnNames1[1];
-    const annualPopRate = columnNames2[0];
+          columnNames3 = houseCompData.columns.slice(2),
+          columnNames4 = priceList.columns.slice(2),
 
-    const xValue = houseCompData.columns[0];
-    const xValue2 = priceList.columns[0];
+          xValue = houseCompData.columns[0],
 
-    const dataSet = dataSets(economyData, columnNames1);
-    const dataSet2 = dataSets(demographicsData, columnNames2);
-    const dataSet3 = dataSets(houseCompData, columnNames3);
-    const dataSet4 = dataSets(priceList, columnNames4);
-
-    dataSet.forEach( d => {
-        d.quarter = convertQuarter(d.quarter);
-        d.label = formatQuarter(d.quarter);
-        d[empValue] = +d[empValue];
-    });
-
-    dataSet4.forEach( d => {
-        d.quarter = convertQuarter(d.date);
-        d.label = formatQuarter(d.quarter);
-    });
-    
-    const dateFiltered = dataSet.filter( d => {
-        return d.quarter >= new Date("Tue Jan 01 2013 00:00:00") && d.quarter  <= new Date("Tue Feb 01 2017 00:00:00");
-    });
-
-    const dublinData =  dateFiltered.filter( d => {
-        return d.region === "Dublin";
-    });
-
-    const dublinAnnualRate = dataSet2.filter( d => {
-        return d.region === "Dublin";
-    });
-
-    const irelandAnnualRate = dataSet2.filter( d => {
-        return d.region === "Ireland";
-    });
-
-    // charts setup here
-
-    const houseCompMonthly = new GroupedBarChart(dataSet3, columnNames3, xValue, "#hc-glance", "Units", "title2");
-   
-    const priceListQuartley = new GroupedBarChart(dataSet4, columnNames4, xValue2, "#ap-glance", "€", "title2");
-    
-    // for now will just copy but need to create a class for this chart objects
-    const lv = dublinData.length,
-          lv2 = dataSet2.length;
+          dataSet3 = dataSets(houseCompData, columnNames3),
+          dataSet4 = dataSets(priceList, columnNames4);
 
 
-    let elementNode = d3.select("#test-glance").node();
-    let eWidth = elementNode.getBoundingClientRect().width; 
+          population_Age.forEach( d => {
+            d.date = d.year;
+            d[popV] = +d[popV];
+          });
 
-    const lastValue = dublinData[lv-1];
-    const lastValue2 = dataSet2[lv2-1];
-    console.log(lastValue2);
-    
-    // dimensions margins, width and height
-    const m = [30, 10, 25, 10],
-        w = eWidth - m[1] - m[3],
-        h = 120 - m[0] - m[2];
-    console.log(h);
-    // setting the line values range
-    let x = d3.scaleTime().range([0, w-5]);
-    let y = d3.scaleLinear().range([h + m[1], 0]);
-    
-    // setup the line chart
-    let valueline = d3.line()
-        .defined(function(d) { return !isNaN(d[empValue]); })
-        .x(function(d,i) { return x(d.quarter); })
-        .y(function(d) { return y(d[empValue]); })
-        .curve(d3.curveBasis);
+          const popDCCData = nestData(popDCC, "year", popAgeK, popV);
+          const popDCSDCData = nestData(popDCSDC, "year", popAgeK, popV);
 
-    let arealine = d3.area()
-    .defined(function(d) { return !isNaN(d[empValue]); })
-        .x(valueline.x())
-        .y1(valueline.y())
-        .y0(y(0));
+    const primary = dataSet3.filter( d => {
+            return d.schools === "Primary";
+          }),
 
+          secondary = dataSet3.filter( d => {
+            return d.schools === "Secondary";
+          });
 
-
-    // Adds the svg canvas
-    let svg = d3.select("#test-glance")
-        .append("svg")
-        .attr("width", w + m[1] + m[3])
-        .attr("height", h + m[0] + m[2])
-        .append("g")
-        .attr("transform", "translate(" + m[3] + "," + "20" + ")");
-        // Scale the range of the data
-        let maxToday = dublinData.length > 0 ? d3.max(dublinData, function(d) { return d[empValue]; }) : 0;
-        // let maxReference = irelandData.length > 0 ? d3.max(irelandData, function(d) { return d[empValue]; }) : 0;
-        x.domain(d3.extent(dublinData, d => {
-            return (d.quarter); }));
-        y.domain([0, Math.max(maxToday)]);
-    
-
-    // let divInfo = d3.select("#test-glance")
-    //     .append("div")
-    //     .style("max-width", "33.333333%")
-    //     .style("float","right");
-
-    // svg.append("path")
-    //     .attr("d", valueline2(irelandData))
-    //     .attr("stroke","#f8f9fa8c")
-    //     .attr("stroke-width", 4)
-    //     .attr("fill", "none")
-    //     .attr("stroke-linecap", "round");
- 
-    svg.append("path")
-        .attr("class", "activity")
-        .attr("d", valueline(dublinData))
-        .attr("stroke","#16c1f3")
-        .attr("stroke-width", 4)
-        .attr("fill", "none");
-        // .attr("stroke-linecap", "round");
-    
-    svg.append("path")
-        .attr("class", "area")
-        .attr("d", arealine(dublinData))
-        .attr("fill", "rgba(29, 158, 201, 0.6)");
-
-    svg.append("text")
-        .attr("dx", 0)
-        .attr("dy", -10)
-        .attr("class", "label employment")
-        .attr("fill", "#16c1f3")
-        .text("Dublin");
-
-    svg.append("text")
-        .attr("x", w)
-        .attr("y", y(lastValue[empValue])-10)
-        .attr("text-anchor", "end")
-        .attr("class", "label value")
-        .attr("fill", "#f8f9fabd")
-        .text(lastValue[empValue] + "k");
-
-    svg.append("text")
-        .attr("x", w)
-        .attr("y", h + 30)
-        .attr("text-anchor", "end")
-        .attr("class", "label employment")
-        .attr("fill", "#f8f9fabd")
-        // .text("2016: " + lastValue + " (No. per 1000 Pop.)");
-        .text("2017Q1");
-
-    svg.append("text")
-        .attr("x", 0)
-        .attr("y", h + 30)
-        .attr("text-anchor", "start")
-        .attr("class", "label employment")
-        .attr("fill", "#f8f9fabd")
-        // .text("2016: " + lastValue + " (No. per 1000 Pop.)");
-        .text("2013Q1");
-
-    svg.append("circle")
-        .attr("cx", x(lastValue.quarter))
-        .attr("cy", y(lastValue[empValue]))
-        .attr("r", 3)
-        .attr("transform", "translate(0,0)")
-        .attr("class", "cursor")
-        .style("stroke", "#16c1f3")
-        .style("stroke-width", "2px");
-
-    updateInfoText("#emp-chart a", "Total Unemployment in Dublin for ", " on previous Quarter", dublinData, columnNames1[1], "label", d3.format(".3s"), true);
-    updateInfoText("#app-chart a", "Average New Property Prices in Dublin for ", " on previous Quarter", dataSet4, columnNames4[0], "label", locale.format("$,"));
-    updateInfoText("#apd-chart a", "The total population of Dublin in ", " on 2011", dataSet2, columnNames2[0], "date", d3.format(".2s") );
-    updateInfoText("#huc-chart a", "Monthly House unit completions in Dublin ", " on previous Month", dataSet3, columnNames3[0], "date", d3.format("") );
-
-
-    const size = dublinAnnualRate.length,
-          lValue = dublinAnnualRate[size-1],
-          lValue2 = irelandAnnualRate[size-1];
+    // const pop =  {
+    //         d : dublinAnnualRate,
+    //         e : "#pr-glance",
+    //         yV: annualPopRate,
+    //         xV: "date",
+    //         sN: "region",
+    //         fV: d3.format(".2s"),
+    //         dL: "date"
+    //     },
         
-    // setup the line chart
-    let valuelineRate = d3.line()
-        .x(function(d,i) { return x(d.date); })
-        .y(function(d) { return y(d[annualPopRate]); })
-        .curve(d3.curveBasis);
+    //     popChart = new DataGlanceLine(pop);
 
-    let arealineRate = d3.area()
-        .x(valuelineRate.x())
-        .y1(valuelineRate.y())
-        .y0(y(0));
+
+    const houseCompMonthly = new GroupedBarChart(primary, columnNames3, xValue, "#dcc-se-glance", "Units", "title2");
+    const dcsdcSchools = new GroupedBarChart(secondary, columnNames3, xValue, "#dcsdc-se-glance", "Units", "title2");
     
-    // Adds the svg canvas
-    let svg2 = d3.select("#pr-glance")
-        .append("svg")
-        .attr("width", w + m[1] + m[3])
-        .attr("height", h + m[0] + m[2])
-        .append("g")
-        .attr("transform", "translate(" + m[3] + "," + "20" + ")");
-        // Scale the range of the data
-        let maxDublin = dublinAnnualRate.length > 0 ? d3.max(dublinAnnualRate, function(d) { return d[annualPopRate]; }) : 0;
-        // let maxIreland = irelandAnnualRate.length > 0 ? d3.max(irelandAnnualRate, function(d) { return d[annualPopRate]; }) : 0;
-        x.domain(d3.extent(dublinAnnualRate, d => {
-            return (d.date); }));
-        y.domain([0, Math.max(maxDublin)]);
+    const popProfileDCC = new StackBarChart("#dcc-pop", popDCCData, popAgeKs);
+    const popProfileDCSDC = new StackBarChart("#dcsdc-pop", popDCSDCData, popAgeKs);
+        //   popProfile.getData(popData);
+
+    d3.select(window).on("resize", function(){
+        houseCompMonthly.init(); 
+        unemployChart.init();
+        popChart.init();
+        priceIndexChart.init();
         
-        // svg2.append("path")
-        //     .attr("d", valuelineRate(irelandAnnualRate))
-        //     .attr("stroke","#f8f9fa8c")
-        //     .attr("stroke-width", 4)
-        //     .attr("fill", "none")
-        //     .attr("stroke-linecap", "round");
-
-        svg2.append("path")
-            .attr("class", "activity")
-            .attr("d", valuelineRate(dublinAnnualRate))
-            .attr("stroke","#16c1f3")
-            .attr("stroke-width", 4)
-            .attr("fill", "none");
-
-        svg2.append("path")
-            .attr("class", "area")
-            .attr("d", arealineRate(dublinAnnualRate))
-            .attr("fill", "rgba(29, 158, 201, 0.6)");
-        
-        // svg2.append("text")
-        //     .attr("dx", 0)
-        //     .attr("dy", 2)
-        //     .attr("class", "label yesterday")
-        //     .attr("fill", "#f8f9fabd")
-        //     .text("Ireland");
-    
-        svg2.append("text")
-            .attr("x", w)
-            .attr("y", h + 30)
-            .attr("text-anchor", "end")
-            .attr("class", "label employment")
-            .attr("fill", "#f8f9fabd")
-            // .text("2016: " + lastValue + " (No. per 1000 Pop.)");
-            .text("2016");
-
-        svg2.append("text")
-            .attr("x", 0)
-            .attr("y", h + 30)
-            .attr("text-anchor", "start")
-            .attr("class", "label employment")
-            .attr("fill", "#f8f9fabd")
-            // .text("2016: " + lastValue + " (No. per 1000 Pop.)");
-            .text("1911");
-    
-        svg2.append("text")
-            .attr("dx", 0)
-            .attr("dy", -10)
-            .attr("class", "label employment")
-            .attr("fill", "#16c1f3")
-            .text("Dublin")
-
-        svg2.append("text")
-            .attr("x", w)
-            .attr("y", y((lastValue2["Population (Number)"])) - 8)
-            .attr("text-anchor", "end")
-            .attr("class", "label value")
-            .attr("fill", "#f8f9fabd")
-            .text(d3.format(".2s")(lastValue2["Population (Number)"]));
-    
-        // svg2.append("text")
-        //     .attr("x", w)
-        //     .attr("y", 2)
-        //     .attr("text-anchor", "end")
-        //     .attr("class", "label employment")
-        //     .attr("fill", "#16c1f3")
-        //     .text("2016 : " + lValue[annualPopRate] + " (No. per 1000 Pop.)");
-
-        svg2.append("circle")
-            .attr("cx", w -5)
-            .attr("cy", y(lastValue2["Population (Number)"]))
-            .attr("r", 3)
-            .attr("transform", "translate(0,0)")
-            .attr("class", "cursor")
-            .style("stroke", "#16c1f3")
-            .style("stroke-width", "2px");
+        let screenSize = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if(screenSize >= 768){
+            renderMap(dublincoco);
+            }
+            else{
+            renderTabs(dublincoco);
+            }
+    });
 
 }).catch(function(error){
     console.log(error);
 });
 
-// $(function () {
-//     $('[data-toggle="tooltip"]').tooltip();
-// });
-
-
 class DataGlanceLine{
 
     // constructor function
-    constructor (_data, _data2, _keys, _lastItem, _xValue, _element, _titleX, _titleY){
+    constructor (obj){
 
-        this.data = _data;
-        this.data2 = _data2 !== null ? _data2 : null;
-        this.keys = _keys;
-        this.lastItem = _lastItem;
-        this.xValue = _xValue;
-        this.element = _element;
-        this.titleX = _titleX; 
-        this.titleY = _titleY; 
+        this.d = obj.d;
+        this.e = obj.e;
+        this.yV = obj.yV;
+        this.xV = obj.xV;
+        this.sN = obj.sN; 
+        this.fV = obj.fV;
+        this.dL = obj.dL;
 
         // create the chart area
         this.init();
     }
 
     init(){
-        let dv = this;
+        let c = this;
 
-        dv.elementNode = d3.select(dv.element).node();
-        dv.eWidth = elementNode.getBoundingClientRect().width; 
+        d3.select(c.e).select("svg").remove();
+
+        c.eN = d3.select(c.e).node();
+        c.eW = c.eN.getBoundingClientRect().width; 
         
         // dimensions margins, width and height
-        const m = [30, 10, 25, 10],
-            w = eWidth - m[1] - m[3],
-            h = 120 - m[0] - m[2];
-        
-        // setting the line values range
-        let x = d3.scaleTime().range([0, w-5]);
-        let y = d3.scaleLinear().range([h + m[1], 0]);
-        
-        // setup the line chart
-        let valueline = d3.line()
-            .x(function(d,i) { return x(d.quarter); })
-            .y(function(d) { return y(d[empValue]); })
-            .curve(d3.curveBasis);
-    
-        let valueline2 = d3.line()
-            .x(function(d,i) { return x(d.quarter); })
-            .y(function(d) { return y(d[empValue]); })
-            .curve(d3.curveBasis);
+        c.m = [20, 10, 25, 10];
+        c.w = c.eW - c.m[1] - c.m[3];
+        c.h = 120 - c.m[0] - c.m[2];
+
+        c.setScales();
+        c.drawLine();
+        c.drawLabels();
     }
 
-    drawArea(){}
-    setAxis(){}
-    getData(){}
+    setScales(){
+        let c = this,
+            maxToday = c.d.length > 0 ? d3.max(c.d, (d) => { return d[c.yV]; }) : 0;
 
+            // setting the line values ranges
+            c.x = d3.scaleTime().range([0, c.w-5]);
+            c.y = d3.scaleLinear().range([c.h -10, 0]);
+                
+            // setup the line chart function
+            c.line = d3.line()
+                .defined((d) => { return !isNaN(d[c.yV]); })
+                .x(d =>{ return c.x(d[c.xV]); })
+                .y(d =>{ return c.y(d[c.yV]); })
+                .curve(d3.curveBasis);
+        
+            c.x.domain(d3.extent(c.d, d => {
+                        return (d[c.xV]); }));
+                    
+            c.y.domain([0, Math.max(maxToday)]);
+        
+    }
 
+    drawLine(){
+        let c = this;
+
+        // Adds the svg canvas
+            c.svg = d3.select(c.e)
+                .append("svg")
+                .attr("width", c.w + c.m[1] + c.m[3])
+                .attr("height", c.h + c.m[0])
+                    .append("g")
+                    .attr("transform", "translate(" + c.m[3] + "," + "20" + ")");
+        
+        // add the data
+            c.svg.append("path")
+                .attr("class", "activity")
+                .attr("d", c.line(c.d))
+                .attr("stroke","#16c1f3") // move to css
+                .attr("stroke-width", 4) // move to css
+                .attr("fill", "none"); // move to css
+    }
+    
+    drawLabels(){
+        let c = this,
+            l = c.d.length,
+            lD = c.d[l-1],
+            fD = c.d[0];
+
+            // Region/type name
+            c.svg.append("text")
+                .attr("dx", 0)
+                .attr("dy", -10)
+                .attr("class", "label")
+                .attr("fill", "#16c1f3")// move to css
+                .text(lD[c.sN]);// needs to be a d.name
+
+            // value label
+            c.svg.append("text")
+                .attr("x", c.w + 10)
+                .attr("y", c.y(lD[c.yV])-10)
+                .attr("text-anchor", "end")// move to css
+                .attr("class", "label")
+                .attr("fill", "#f8f9fabd")// move to css
+                .text(c.fV? c.fV(lD[c.yV]): lD[c.yV]); 
+
+            // latest date label
+            c.svg.append("text")
+                .attr("x", c.w)
+                .attr("y", c.h - 5)
+                .attr("text-anchor", "end")// move to css
+                .attr("class", "label employment")
+                .attr("fill", "#f8f9fabd")// move to css
+                .text(lD[c.dL]);
+
+            // first date label
+            c.svg.append("text")
+                .attr("x", 0)
+                .attr("y", c.h - 5)
+                .attr("text-anchor", "start")// move to css
+                .attr("class", "label employment")
+                .attr("fill", "#f8f9fabd")// move to css
+                .text(fD[c.dL]);
+
+            c.svg.append("circle")
+                .attr("cx", c.x(lD[c.xV]))
+                .attr("cy", c.y(lD[c.yV]))
+                .attr("r", 3)
+                .attr("transform", "translate(0,0)")// move to css
+                .attr("class", "cursor")
+                .style("stroke", "#16c1f3") // move to css
+                .style("stroke-width", "2px"); // move to css
+    }
 }
+
 
 class GroupedBarChart{
 
@@ -398,125 +266,89 @@ class GroupedBarChart{
 
     // initialise method to draw chart area
     init(){
-        let dv = this,
-            last = dv.data.length -1;
+        let c = this,
+            last = c.data.length -1;
+            c.lastValue = c.data[last];
 
-            dv.lastValue = dv.data[last].Dublin;
+         d3.select(c.element).select("svg").remove();
 
-
-        let eNode = d3.select(dv.element).node();
+        let eNode = d3.select(c.element).node();
         let eWidth = eNode.getBoundingClientRect().width; 
         
         // margin
-        dv.m = [30, 10, 25, 10]
+        c.m = [20, 10, 25, 10];
         
-        dv.width = eWidth - dv.m[1] - dv.m[3];
-        dv.height = 120 - dv.m[0] - dv.m[2];
-
-        dv.tooltip = d3.select(".page__root")
-            .append('div')  
-            .attr('class', 'tool-tip');  
+        c.width = eWidth - c.m[1] - c.m[3];
+        c.height = 120 - c.m[0] - c.m[2];
 
         // add the svg to the target element
-        const svg = d3.select(dv.element)
+        const svg = d3.select(c.element)
             .append("svg")
-            .attr("width", dv.width + dv.m[1] + dv.m[3])
-            .attr("height", dv.height + dv.m[0] + dv.m[2]);
+            .attr("width", c.width + c.m[1] + c.m[3])
+            .attr("height", c.height + c.m[0]);
        
         // add the g to the svg and transform by top and left margin
-        dv.g = svg.append("g")
-            .attr("transform", "translate(" + dv.m[3] + "," + "20" + ")");
+        c.g = svg.append("g")
+            .attr("transform", "translate(" + c.m[3] + "," + "20" + ")");
     
         // transition 
-        dv.t = () => { return d3.transition().duration(1000); }
+        c.t = () => { return d3.transition().duration(1000); }
     
-        dv.colourScheme = ["#aae0fa","#00929e","#16c1f3","#16c1f3","#da1e4d","#086fb8","#16c1f3"];
+        c.colourScheme = ["#aae0fa","#00929e","#da1e4d","#086fb8","#aae0fa","#16c1f3"];
 
         // set colour function
-        dv.colour = d3.scaleOrdinal(dv.colourScheme.reverse());
+        c.colour = d3.scaleOrdinal(c.colourScheme.reverse());
 
-        dv.x0 = d3.scaleBand()
-            .range([0, dv.width])
+        c.x0 = d3.scaleBand()
+            .range([0, c.width])
             .padding(0.05);
 
-        dv.x1 = d3.scaleBand()
+        c.x1 = d3.scaleBand()
             .paddingInner(0.1);
     
-        dv.y = d3.scaleLinear()
-            .range([dv.height + dv.m[1], 0]);
-
-        // dv.xAxisCall = d3.axisBottom()
-        // .tickSize(0);
-
-        // dv.xAxis = dv.g.append("g")
-        //     .attr("class", "no-axis x-axis")
-        //     .attr("transform", "translate(0," + (dv.height + 10) +")");
+        c.y = d3.scaleLinear()
+            .range([c.height, 0]);
     
         // Start Month
-        dv.g.append("text")
+        c.g.append("text")
             .attr("class", "label")
             .attr("x", 0)
-            .attr("y", dv.height + 30)
+            .attr("y", c.height -5)
             .attr("text-anchor", "start")
             .attr("fill", "#f8f9fabd")
-            .text(dv.data[0].date);
+            .text(c.data[0].date);
     
         // Last Month
-        dv.g.append("text")
+        c.g.append("text")
             .attr("class", "label")
-            .attr("x", dv.width)
-            .attr("y", dv.height + 30)
+            .attr("x", c.width)
+            .attr("y", c.height -5)
             .attr("text-anchor", "end")
             .attr("fill", "#f8f9fabd")
-            .text(dv.data[last].date);
-        
-        // Title 
-        dv.g.append("text")
-            .attr("dx", 0)
-            .attr("dy", -10)
-            .attr("class", "label")
-            .attr("fill", "#16c1f3")
-            .text(dv.keys[0]);
+            .text(c.data[last].date);
 
-        // // Last Month Value in Units
-        // dv.g.append("text")
-        //     .attr("x", dv.width)
-        //     .attr("y", 2)
-        //     .attr("text-anchor", "end")
-        //     .attr("class", "label")
-        //     .attr("fill", "#16c1f3")
-        //     .text(dv.titleX === "€" ? dv.data[last].date + " : " + dv.titleX + d3.format(",")(dv.data[last][dv.keys[0]]) :
-        //           dv.data[last].date + " : " +dv.data[last][dv.keys[0]] + " " + dv.titleX);
-    
-        dv.update();
+        c.update();
     
     }
     
     update(){
-        let dv = this;
+        let c = this;
 
         // Update scales
-        dv.x0.domain(dv.data.map(d => { return d[dv.xValue]; }));
-        dv.x1.domain(dv.keys).range([0, dv.x0.bandwidth()]);
-        dv.y.domain([0, d3.max(dv.data, d => { return d3.max(dv.keys, key => { return d[key]; }); })]).nice();
-
-        // Update axes
-        // dv.xAxisCall.scale(dv.x0);
-        // dv.xAxis.call(dv.xAxisCall);
-        
-        // dv.yAxisCall.scale(dv.y);
-        // dv.yAxis.call(dv.yAxisCall);
+        c.x0.domain(c.data.map(d => { return d[c.xValue]; }));
+        c.x1.domain(c.keys).range([0, c.x0.bandwidth()]);
+        c.y.domain([0, d3.max(c.data, d => { return d3.max(c.keys, key => { return d[key]; }); })]).nice();
 
         // join new data with old elements.
-        dv.rects = dv.g.append("g")
+        c.rects = c.g.append("g")
             .attr("class","parent")
             .selectAll("g")
-            .data(dv.data)
+            .data(c.data, (d) => { return !isNaN(d.Value); })
             .enter()
             .append("g")
-            .attr("transform", (d) => { return "translate(" + dv.x0(d[dv.xValue]) + ", 0)"; })
+            .attr("transform", (d) => { return "translate(" + c.x0(d[c.xValue]) + ", 0)"; })
             .selectAll("rect")
-            .data(d => { return dv.keys.map( key => { 
+            .data(d => { return c.keys.map( key => { 
                     return {
                         key: key, 
                         value: d[key]
@@ -524,44 +356,41 @@ class GroupedBarChart{
                 }); 
             })
             .enter().append("rect")
-            .attr("x", d => { return dv.x1(d.key); })
-            .attr("y", d => { return dv.y(d.value); })
-            .attr("width", dv.x1.bandwidth())
-            .attr("height", d => { return (dv.height - dv.y(d.value) + dv.m[1] ) ; })
+            .attr("x", d => { return c.x1(d.key); })
+            .attr("y", d => { return c.y(d.value); })
+            .attr("width", c.x1.bandwidth())
+            .attr("height", d => { return (c.height - c.y(d.value) - c.m[0] ) ; })
             .attr("rx","2")
             .attr("ry","2")
-            .attr("fill", "rgba(29, 158, 201, 0.6)");
+            .attr("fill", d => { return c.colour(d.key); })
+            .attr("opacity",".6"); //c.colour
 
-            d3.select(".parent g:nth-last-child(1) rect")
-                .attr("fill", "#16c1f3");
+            c.g.select(".parent g:nth-last-child(1)").selectAll("rect")
+                .attr("opacity", "1");
 
-            dv.g.append("text")
-                .attr("dx", dv.width)
-                .attr("dy", dv.y(dv.lastValue) - 10)
-                .attr("text-anchor", "end")
-                .attr("class", "label value")
-                .attr("fill", "#f8f9fabd")
-                .text(dv.lastValue);
-        
-        // dv.g.selectAll("rect")
-        //     .on("mouseover", function(){ 
-        //         dv.tooltip.style("display", "inline-block"); 
-        //     })
-        //     .on("mouseout", function(){ 
-        //         dv.tooltip.style("display", "none"); 
-        //     })
-        //     .on("mousemove", function(d){
-        //         let dx  = parseFloat(d3.select(this).attr('x')) + dv.x0.bandwidth() + 100, 
-        //             dy  = parseFloat(d3.select(this).attr('y')) + 10;
-        //         var x = d3.event.pageX, 
-        //             y = d3.event.clientY;
+            // c.g.append("text")
+            //     .attr("dx", c.width)
+            //     .attr("dy", c.y(c.lastValue) - 10)
+            //     .attr("text-anchor", "end")
+            //     .attr("class", "label value")
+            //     .attr("fill", "#f8f9fabd")
+            //     .text(c.lastValue);
+        console.log("values",c.lastValue[c.keys[0]])
+        // Title 
+        c.g.append("text")
+            .attr("dx", 0)
+            .attr("dy", -10)
+            .attr("class", "label")
+            .attr("fill", d => { return c.colour(c.keys[0]); })
+            .text(c.keys[0] + ": " +c.lastValue[c.keys[0]]);
 
-        //         dv.tooltip
-        //             .style( 'left', (d3.event.pageX+10) + "px" )
-        //             .style( 'top', (d3.event.pageY) + "px" )
-        //             .style( 'display', "inline-block" )
-        //             .text("The value is: " + (d.value)); // what should the value be ?
-        //     });
+        c.g.append("text")
+            .attr("dx", c.width)
+            .attr("dy", -10)
+            .attr("text-anchor", "end")
+            .attr("class", "label")
+            .attr("fill", d => { return c.colour(c.keys[1]); })
+            .text(c.keys[1] + ": " +c.lastValue[c.keys[1]]);
     }
     
 }
@@ -580,7 +409,7 @@ function formatQuarter(date){
     newDate.setMonth(date.getMonth() + 1);
     let year = (date.getFullYear());
     let q = Math.ceil(( newDate.getMonth()) / 3 );
-    return "Quarter "+ q + ' in ' + year;
+    return year + " Q"+ q;
 }
 
 function updateInfoText(selector, startText, endText, data, valueName, labelName, format, changeArrrow ){
@@ -600,16 +429,6 @@ function updateInfoText(selector, startText, endText, data, valueName, labelName
         indicatorColour = cArrow ? difference > 0 ?  red : green : difference > 0 ?  green : red,
         startString = startText,
         endString = endText;
-        // screenSize = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        // console.log(screenSize);
-
-        // let divInfo = d3.select(selector).select(".line-chart")
-        //     .append("div")
-        //     .style("max-width", "33.333333%")
-        //     .style("width", "33.333333%")
-        //     .style("float","right")
-        //     .append("h5").html(indicatorSymbol).style("text-align", "center")
-        //     .append("h5").html(format(currentValue)).style("text-align", "center");
 
         d3.select(selector)
         .on("mouseover", (d) => { 
@@ -652,11 +471,389 @@ function updateInfoText(selector, startText, endText, data, valueName, labelName
 
             text.append("text").text(" " + endString);
         });
-        // d3.select(selector).on("touchstart", (d) => {
-        //     text.text(textString);
-        // })
 }
 
-function infoText(){
+class StackedAreaChart {
 
+    // constructor function
+    constructor (e,dV, k){
+
+        // load in arguments from config object
+        this.element = e;
+        this.date = dV;
+        this.keys = k;
+        
+        // create the chart
+        this.init();
+    }
+
+    // initialise method to draw chart area
+    init(){
+        let c = this;
+            // last = c.data.length -1;
+            // c.lastValue = c.data[last];
+
+            d3.select(c.element).select("svg").remove();
+
+        let eNode = d3.select(c.element).node();
+        let eWidth = eNode.getBoundingClientRect().width; 
+        
+            // margin
+            c.m = [20, 10, 25, 10];
+            
+            c.width = eWidth - c.m[1] - c.m[3];
+            c.height = 200 - c.m[0] - c.m[2];
+
+        // add the svg to the target element
+        const svg = d3.select(c.element)
+            .append("svg")
+            .attr("width", c.width + c.m[1] + c.m[3])
+            .attr("height", c.height + c.m[0]);
+       
+        // add the g to the svg and transform by top and left margin
+        c.g = svg.append("g")
+            .attr("transform", "translate(" + c.m[3] + "," + "20" + ")");
+
+        // default transition 
+        c.t = () => { return d3.transition().duration(1000); };
+        
+        c.colourScheme = ["#d73027",
+        "#f46d43",
+        "#fdae61",
+        "#fee090",
+        "#ffffbf",
+        "#e0f3f8",
+        "#abd9e9",
+        "#74add1",
+        "#4575b4"].reverse();
+        
+        // default colourScheme
+        // c.colourScheme =d3.schemeBlues[9].slice(4);
+        
+        // colour function
+        c.colour = d3.scaleOrdinal(c.colourScheme);
+
+        // bisector for tooltip
+        c.bisectDate = d3.bisector(d => { return (d[c.date]); }).left;
+
+        c.addAxis();
+    }
+
+    addAxis(){
+        let c = this;
+
+        // X title
+        c.xLabel = c.g.append("text")
+            .attr("class", "test")
+            .attr("x", c.width/2)
+            .attr("y", c.height + 50)
+            .attr("text-anchor", "start")
+            .text("c.test");
+
+        // Y title
+        c.yLabel = c.g.append("text")
+            .attr("class", "test")
+            .attr("x", - (c.height/2))
+            .attr("y", -50)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .text("c.test");
+
+    }
+
+    // pass the data and the nest value
+    getData(_data, yScaleFormat){
+        let c = this;
+            // c.yScaleFormat = c.formatValue(yScaleFormat) || null;            
+            c.nestedData =_data;
+            c.createScales();
+    }
+
+    createScales(){
+        let c = this;
+
+        // set scales
+        c.x = d3.scaleTime().range([0, c.width]);
+        c.y = d3.scaleLinear().range([c.height, 0]);
+
+        // get the the combined max value for the y scale
+        let maxDateVal = d3.max(c.nestedData, d => {
+            let vals = d3.keys(d).map(key => { 
+                return key === c.date || typeof d[key] === 'string' ? 0:d[key];
+                // return key !== c.date ? d[key] : 0;
+            });
+            return d3.sum(vals);
+        });
+
+        // Update scales
+        c.x.domain(d3.extent(c.nestedData, (d) => { return (d[c.date]); }));
+        c.y.domain([0, maxDateVal]);
+        
+        c.arealine = d3.line()
+            .defined(function(d) { return !isNaN(d[1]); })
+            // .curve(c.area.curve())
+            .x(d => { return c.x(d.data[c.date]); })
+            .y(d => { return c.y( d[1]); });
+
+        // d3 area function
+         c.area = d3.area()
+            .defined(function(d) { return !isNaN(d[1]); })
+            .x(function(d) { return c.x(d.data[c.date]); })
+            .y0(function(d) { return c.y(d[0]); })
+            .y1(function(d) { return c.y( d[1]); });
+
+         // d3 stack function
+        c.stack = d3.stack().keys(c.keys);
+        c.data = (c.stack(c.nestedData));
+
+        c.update();
+    }
+
+    update(){
+        let c = this;
+            d3.select(c.element).select(".focus").remove();
+            d3.select(c.element).select(".focus_overlay").remove();
+            c.g.selectAll(".region")
+                .transition(c.t())
+                .style("opacity", 0)
+                .remove(); // cheap fix for now
+
+        // select all regions and join data with old
+        c.regions = c.g.selectAll(".area")
+            .data(c.data, d => { return d})
+            .enter()
+                .append("g")
+                    .classed("region", true);
+
+        c.regions
+            .append("path")
+            .attr("class", "area")
+            .style("fill", (d) => {return c.colour(d.key);})
+            .style("fill-opacity", 0.0)
+            .transition(c.t())
+            .attr("d", c.area)
+            .style("fill-opacity", 0.75);
+            
+    
+        c.regions
+            .append("path")
+            .attr("class", "area-line")
+            .style("stroke", (d) => {return c.colour(d.key);})
+            // .transition(c.t())
+            .attr("d", c.arealine);
+            
+
+        // Update
+        c.g.selectAll(".area")
+            .data(c.data)
+            .style("fill", (d) => {return c.colour(d.key);})
+            // .transition(c.t())
+            .attr("d", c.area)
+            .style("fill-opacity", 0.75);
+            
+    
+        c.g.selectAll(".area-line")
+            .data(c.data)
+            .transition(c.t())
+            .attr("d", c.arealine);
+    
+    }
 }
+
+function nestData(data, label, name, value){
+    let nested_data = d3.nest()
+        .key(function(d) { return d[label]; })
+        .entries(data); // its the string not the date obj
+
+    let mqpdata = nested_data.map(function(d){
+        let obj = {
+            label: d.key
+        }
+            d.values.forEach(function(v){
+            obj[v[name]] = v[value];
+            obj.date = v.date;
+        })
+    return obj;
+  })
+return mqpdata;
+}
+
+
+class StackBarChart {
+
+    constructor(_element, _data, _columns){
+
+        this.element = _element;
+        this.data = _data;
+        this.columns = _columns;
+
+        this.init();
+    }
+
+    init(){
+        let dv = this,
+            elementNode = d3.select(dv.element).node(),
+            elementWidth = elementNode.getBoundingClientRect().width,
+            aspectRatio = elementWidth < 800 ? elementWidth * 0.55 : elementWidth * 0.5;
+
+            d3.select(dv.element).select("svg").remove();
+            
+        const breakPoint = 678;
+        
+        // margin
+        dv.margin = { };
+
+        dv.margin.top = elementWidth < breakPoint ? 10 : 50;
+        dv.margin.bottom = elementWidth < breakPoint ? 30 : 60;
+
+        dv.margin.right = elementWidth < breakPoint ? 150 : 150;
+        dv.margin.left = elementWidth < breakPoint ? 20 : 80;
+        
+        dv.width = elementWidth - dv.margin.left - dv.margin.right;
+        dv.height = 160 - dv.margin.top - dv.margin.bottom;
+        
+        // add the svg to the target element
+        dv.svg = d3.select(dv.element)
+            .append("svg")
+            .attr("width", dv.width + dv.margin.left + dv.margin.right)
+            .attr("height", dv.height + dv.margin.top + dv.margin.bottom);
+       
+        // add the g to the svg and transform by top and left margin
+        dv.g = dv.svg.append("g")
+            .attr("transform", "translate(" + dv.margin.left + 
+                ", " + dv.margin.top + ")");
+
+        // stack function
+        dv.stack = d3.stack().keys(dv.columns);
+        // dv.colourScheme = ["#aae0fa","#00929e","#da1e4d","#ffc20e","#16c1f3","#086fb8","#003d68"];
+        
+        // default colourScheme
+        dv.colourScheme =d3.schemeBlues[9].slice(4);
+
+        // set colour function
+        dv.colour = d3.scaleOrdinal(dv.colourScheme);
+
+        // set scales functions
+        dv.x = d3.scaleBand()
+            .range([0, dv.width])
+            .padding(0.2);
+
+        dv.y = d3.scaleLinear()
+            .range([dv.height, 0]);
+
+        dv.xAxisCall = d3.axisBottom();
+
+        dv.xAxis = dv.g.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", "translate(0," + dv.height +")");
+
+        // X title
+        dv.xLabel = dv.g.append("text")
+            .attr("class", "titleX")
+            .attr("x", dv.width/2)
+            .attr("y", dv.height + 60)
+            .attr("font-size", "20px")
+            .attr("text-anchor", "middle")
+            .text("test");
+
+        // Y title
+        dv.yLabel = dv.g.append("text")
+            .attr("class", "titleY")
+            .attr("x", - (dv.height/2))
+            .attr("y", -50)
+            .attr("font-size", "20px")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .text("test");
+
+            dv.addLegend();
+            dv.update();
+    }
+
+    update(){
+        let dv = this;
+
+        dv.series = dv.stack(dv.data);
+
+        // transition 
+        const t = () => { return d3.transition().duration(1000); };
+
+        const xAxisCall = d3.axisBottom();
+
+        dv.x.domain(dv.data.map( d => {
+            // console.log("x domain date list: ", d.date);
+            return d.date;
+        }));
+
+        // have a check to see what domain values to use
+        dv.y.domain([0, d3.max(
+            dv.series, d => { return d3.max(d, d => { return d[1]; }); 
+        })]).nice();
+
+        xAxisCall.scale(dv.x);
+        dv.xAxis.transition(t()).call(xAxisCall);
+
+        dv.layers = dv.g.selectAll(".stack")
+                .data(dv.series)
+                .enter().append("g")
+                .attr("class", "stack")
+                .attr("fill", d => {
+                    return dv.colour(d.key); 
+                    });
+            
+        dv.layers.selectAll("rect")
+            .data( d => { return d; })
+            .enter().append("rect")
+                .attr("x", d => { 
+                    return dv.x(d.data.date); 
+                })
+                .attr("y", d => { 
+                    return dv.y(d[1]); 
+                })
+                .attr("height", d => { return dv.y(d[0]) - dv.y(d[1]);})
+                .attr("width", dv.x.bandwidth())
+                .style("stroke-width", "1");
+    }
+
+    addLegend(){
+        let dv =this;
+        const lastV = dv.data[dv.data.length -1],
+            vs = dv.data.filter(idFilter),
+            s = vs.length -1;
+            console.log(s);
+        // create legend group
+        let legend = dv.g.append("g")
+        .attr("transform", "translate(0,0)");
+        
+        let legends = legend.selectAll(".legend")
+        .data(dv.columns.reverse())
+        .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", (d, i) => {
+                return "translate(-1," + i * 30 + ")"; })
+            .style("font", "12px sans-serif");
+        
+        legends.append("rect")
+            .attr("class", "legendRect")
+            .attr("x", dv.width + 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .attr("fill", dv.colour);
+        
+        legends.append("text")
+            .attr("class", "legendText")
+            .attr("x", dv.width + 44)
+            .attr("y", 9)
+            .attr("dy", ".1rem")
+            .attr("text-anchor", "start")
+            .text(d => { return d + " = " + d3.format(".2s")(vs[s][d]); });
+            // .call(dv.textWrap, 100, dv.width + 44);
+    }
+}
+
+function idFilter(d) {
+    return d["0-15"] !== 0 ? true : false; 
+ }
+
+
+

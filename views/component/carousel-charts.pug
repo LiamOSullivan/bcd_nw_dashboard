@@ -3,28 +3,28 @@ include card-rt
 
 div(class="tab-content" id="nav-tabContent")
   div(class="tab-pane tab-charts fade show active" id="nav-all")
-    .row.tab-charts__row.pt-5
+    .row.tab-charts__row
       #emp-chart.col-xl-3.col-sm-6.col-11
-        +card-chart("themes/economy#unemployed", "card text-white o-hidden border-red", "Unemployment Quarterly Count", "test", "test-glance", "../images/calendar-w.svg")  
-      #app-chart.col-xl-3.col-sm-6.col-11
-        +card-chart("themes/housing#propertyprices", "card text-white o-hidden border-teal", "Average New Property Prices", "test", "ap-glance", "../images/calendar-w.svg")
+        +card-chart("themes", "card text-white o-hidden border-red", "DCC Population Projections", "test", "test-glance", "../images/calendar-w.svg")  
       #apd-chart.col-xl-3.col-sm-6.col-11
-        +card-chart("themes/demographics#population", "card text-white o-hidden border-yellow", "Annual Population", "test","pr-glance", "../images/calendar-w.svg")
+        +card-chart("themes", "card text-white o-hidden border-yellow", "DCSDC Population Projections", "test","pr-glance", "../images/calendar-w.svg")
+      #app-chart.col-xl-3.col-sm-6.col-11
+        +card-chart("themes", "card text-white o-hidden border-teal", "Primary Schools Enrollment", "test", "dcc-se-glance", "../images/calendar-w.svg")
       #huc-chart.col-xl-3.col-sm-6.col-11
-        +card-chart("themes/housing#unitscompmonth", "card text-white o-hidden border-red", "Monthly House Unit Completions", "test","hc-glance", "../images/calendar-w.svg")
+        +card-chart("themes", "card text-white o-hidden border-red", "Secondary Schools Enrollment", "test","dcsdc-se-glance", "../images/calendar-w.svg")
     
-    #data-text 
-      p Hover over these charts for more information, click to go to the data page
+    //- #data-text 
+    //-   p Hover over these charts for more information, click to go to the data page
 
-    //- .row.tab-charts__row
-    //-   #weather-chart.col-xl-3.col-sm-6.col-11
-    //-     +card-rt("/", "card text-white o-hidden border-blue", "Weather", "test", "rt-weather")
-    //-   #bikes-chart.col-xl-3.col-sm-6.col-11
-    //-     +card-rt("/", "card text-white o-hidden border-yellow", "Dublin Bikes", "test", "rt-bikes")
-    //-   #traveltimes-chart.col-xl-3.col-sm-6.col-11
-    //-     +card-rt("/", "card text-white o-hidden border-blue", "Motorway Travel Times", "test","rt-travelTimes")
-    //-   #air-chart.col-xl-3.col-sm-6.col-11
-    //-     +card-rt("/", "card text-white o-hidden border-teal", "Air Quality - Coming Soon", "test","rt-air")    
+    .row.tab-charts__row.pt-2
+      .col-sm-6.col-11
+        +card-rt("/", "card text-white o-hidden border-blue", "Population Age Profiles Donegal", "test", "dcc-pop")
+      .col-sm-6.col-11
+        +card-rt("/", "card text-white o-hidden border-yellow", "Population Age Profiles Derry City & Strabane", "test", "dcsdc-pop")
+      //- #traveltimes-chart.col-xl-3.col-sm-6.col-11
+      //-   +card-rt("/", "card text-white o-hidden border-blue", "Motorway Travel Times", "test","rt-travelTimes")
+      //- #air-chart.col-xl-3.col-sm-6.col-11
+      //-   +card-rt("/", "card text-white o-hidden border-teal", "Air Quality - Coming Soon", "test","rt-air")    
     
     
     

@@ -74,7 +74,7 @@
 
 #local__title__small, #local__open, #dublin-text p{
     color: #f8f8f8;
-    font-weight: 100;
+    /* font-weight: 100; */
 }
 
 .columns-2{
