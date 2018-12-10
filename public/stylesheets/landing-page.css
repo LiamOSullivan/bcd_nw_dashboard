@@ -26,6 +26,10 @@
     color: var(--white);
 }
 
+path.domain{
+    display: none;
+}
+
 .content-wrapper--grad-overlay::before{
     content: "";
     position: absolute;

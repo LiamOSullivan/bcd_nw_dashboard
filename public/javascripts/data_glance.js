@@ -61,21 +61,25 @@ Promise.all([
           xValue = schools.columns[0],
 
           dataSet3 = dataSets(schools, columnNames3),
-          dataSet4 = dataSets(pop_proj, columnNames4),
-          dccPopProj = dataSet4.filter( d => {
-            return d.region === "Donegal"; }),
-          dcsdcPopProj = dataSet4.filter( d => {
-            return d.region === "DCSDC";
+          dataSet4 = dataSets(pop_proj, columnNames4);
+          dataSet4.forEach(d=>{
+              d.label = d.year;
+              d.year = parseYear(d.year);
+          }),
+          nestedDS4 = d3.nest()
+                .key( d =>{ return d.region;})
+                .entries(dataSet4);
+
+          const dccPopProj = nestedDS4.filter( d => {
+            return d.key === "Donegal" || d.key === "North West"; }),
+          dcsdcPopProj = nestedDS4.filter( d => {
+            return d.key === "DCSDC" || d.key === "North West";
           });
-
-
 
           population_Age.forEach( d => {
             d.date = d.year;
             d[popV] = +d[popV];
           });
-
-
 
           const popDCCData = nestData(popDCC, "year", popAgeK, popV);
           const popDCSDCData = nestData(popDCSDC, "year", popAgeK, popV);
@@ -155,7 +159,8 @@ class DataGlanceLine{
     }
 
     init(){
-        let c = this;
+        let c = this,
+        cScheme = ["#aae0fa","#00929e","#da1e4d","#086fb8","#aae0fa","#16c1f3"];
 
         d3.select(c.e).select("svg").remove();
 
@@ -166,6 +171,8 @@ class DataGlanceLine{
         c.m = [20, 10, 25, 10];
         c.w = c.eW - c.m[1] - c.m[3];
         c.h = 120 - c.m[0] - c.m[2];
+
+        c.colour = d3.scaleOrdinal(cScheme.reverse());
 
         c.setScales();
         c.drawLine();
@@ -180,17 +187,43 @@ class DataGlanceLine{
             c.x = d3.scaleTime().range([0, c.w-5]);
             c.y = d3.scaleLinear().range([c.h -10, 0]);
                 
-            // setup the line chart function
+            // // setup the line chart function
+            // c.line = d3.line()
+            //     .defined((d) => { return !isNaN(d[c.yV]); })
+            //     .x(d =>{ return c.x(d[c.xV]); })
+            //     .y(d =>{ return c.y(d[c.yV]); })
+            //     .curve(d3.curveBasis);
+
+            // d3 line function
             c.line = d3.line()
-                .defined((d) => { return !isNaN(d[c.yV]); })
-                .x(d =>{ return c.x(d[c.xV]); })
-                .y(d =>{ return c.y(d[c.yV]); })
-                .curve(d3.curveBasis);
+                .defined(function(d){return !isNaN(d[c.yV]);})
+                .x( d => {
+                    return c.x(d.year); // this needs to be dynamic c.date!!
+                })
+                .y( d => { //this works
+                    return c.y(d[c.yV]); 
+                });
         
-            c.x.domain(d3.extent(c.d, d => {
-                        return (d[c.xV]); }));
+            // c.x.domain(d3.extent(c.d, d => {
+            //             return (d[c.xV]); }));
                     
-            c.y.domain([0, Math.max(maxToday)]);
+            // c.y.domain([0, Math.max(maxToday)]);
+
+                        // Update scales
+            c.x.domain(d3.extent(c.d[0].values, d => {
+                return (d[c.xV]); }));// this needs to be dynamic c.date!!
+            
+            // for the y domain to track negative numbers 
+            const minValue = d3.min(c.d, d => {
+                return d3.min(d.values, d => { return d[c.yV]; });
+            });
+
+            // Set Y axis scales 0 if positive number else use minValue
+            c.y.domain([ minValue >=0 ? 0 : minValue,
+                d3.max(c.d, d => { 
+                return d3.max(d.values, d => { return d[c.yV]; });
+                })
+            ]);
         
     }
 
@@ -204,38 +237,69 @@ class DataGlanceLine{
                 .attr("height", c.h + c.m[0])
                     .append("g")
                     .attr("transform", "translate(" + c.m[3] + "," + "20" + ")");
+                   
+
+            let regions = c.svg.selectAll(".lines")
+                .data(c.d);
+    
+                regions.select(".line")
+                    .attr("d", d => { 
+                        return d.disabled ? null : c.line(d.values); 
+                    });
+
+                // Enter elements
+                regions.enter().append("g")
+                    .attr("class", "lines")
+                    .append("path")
+                    .style("stroke", d => {return c.colour(d.key); })
+                    .attr("class", "line")
+                    .attr("id", d => d.key)
+                    .attr("d", d => { 
+                        return d.disabled ? null : c.line(d.values); })
+                    .style("stroke-width", "3px")
+                    .style("fill", "none"); 
         
-        // add the data
-            c.svg.append("path")
-                .attr("class", "activity")
-                .attr("d", c.line(c.d))
-                .attr("stroke","#16c1f3") // move to css
-                .attr("stroke-width", 4) // move to css
-                .attr("fill", "none"); // move to css
+        // // add the data
+        //     c.svg.append("path")
+        //         .attr("class", "lines")
+        //         .attr("d", c.line(c.d))
+        //         .attr("stroke","#16c1f3") // move to css
+        //         .attr("stroke-width", 4) // move to css
+        //         .attr("fill", "none"); // move to css
     }
     
     drawLabels(){
         let c = this,
-            l = c.d.length,
-            lD = c.d[l-1],
-            fD = c.d[0];
+            l = c.d[0].values.length,
+            lD = c.d[0].values[l-1],
+            fD = c.d[1].values[l-1];
 
+            // Region/type name
+            c.svg.append("text")
+                .attr("dx", c.w)
+                .attr("dy", -10)
+                .attr("text-anchor", "end")
+                .attr("class", "label")
+                .attr("fill",c.colour(lD[c.sN]))// move to css
+                .text(lD[c.sN] + " : " + c.fV(lD[c.yV]));// needs to be a d.name
+
+            
             // Region/type name
             c.svg.append("text")
                 .attr("dx", 0)
                 .attr("dy", -10)
                 .attr("class", "label")
-                .attr("fill", "#16c1f3")// move to css
-                .text(lD[c.sN]);// needs to be a d.name
+                .attr("fill", c.colour(fD[c.sN]))// move to css
+                .text(fD[c.sN] + " : " + c.fV(fD[c.yV]));// needs to be a d.name
 
-            // value label
-            c.svg.append("text")
-                .attr("x", c.w + 10)
-                .attr("y", c.y(lD[c.yV])-10)
-                .attr("text-anchor", "end")// move to css
-                .attr("class", "label")
-                .attr("fill", "#f8f9fabd")// move to css
-                .text(c.fV? c.fV(lD[c.yV]): lD[c.yV]); 
+            // // value label
+            // c.svg.append("text")
+            //     .attr("x", c.w + 10)
+            //     .attr("y", c.y(lD[c.yV])-10)
+            //     .attr("text-anchor", "end")// move to css
+            //     .attr("class", "label")
+            //     .attr("fill", "#f8f9fabd")// move to css
+            //     .text(c.fV? c.fV(lD[c.yV]): lD[c.yV]); 
 
             // latest date label
             c.svg.append("text")
@@ -244,8 +308,7 @@ class DataGlanceLine{
                 .attr("text-anchor", "end")// move to css
                 .attr("class", "label employment")
                 .attr("fill", "#f8f9fabd")// move to css
-                .text(lD[c.dL]);
-
+                .text(lD.label);
             // first date label
             c.svg.append("text")
                 .attr("x", 0)
@@ -253,16 +316,16 @@ class DataGlanceLine{
                 .attr("text-anchor", "start")// move to css
                 .attr("class", "label employment")
                 .attr("fill", "#f8f9fabd")// move to css
-                .text(fD[c.dL]);
+                .text(c.d[0].values[0].label);
 
-            c.svg.append("circle")
-                .attr("cx", c.x(lD[c.xV]))
-                .attr("cy", c.y(lD[c.yV]))
-                .attr("r", 3)
-                .attr("transform", "translate(0,0)")// move to css
-                .attr("class", "cursor")
-                .style("stroke", "#16c1f3") // move to css
-                .style("stroke-width", "2px"); // move to css
+            // c.svg.append("circle")
+            //     .attr("cx", c.x(lD[c.xV]))
+            //     .attr("cy", c.y(lD[c.yV]))
+            //     .attr("r", 3)
+            //     .attr("transform", "translate(0,0)")// move to css
+            //     .attr("class", "cursor")
+            //     .style("stroke", "#16c1f3") // move to css
+            //     .style("stroke-width", "2px"); // move to css
     }
 }
 
@@ -746,7 +809,7 @@ class StackBarChart {
         // dv.colourScheme = ["#aae0fa","#00929e","#da1e4d","#ffc20e","#16c1f3","#086fb8","#003d68"];
         
         // default colourScheme
-        dv.colourScheme =d3.schemeBlues[9].slice(4);
+        dv.colourScheme =d3.schemeBlues[9].slice(3);
 
         // set colour function
         dv.colour = d3.scaleOrdinal(dv.colourScheme);

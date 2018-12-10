@@ -6,6 +6,8 @@ const derry_donegal = {
         "properties": {
              "FID": "0",
              "ENGLISH":"DERRY CITY & STRABANE DISTRICT COUNCIL",
+             "POPULATION":149473,
+             AREA: "1,238 km²",
         }, 
         geometry: {
              "type": "MultiPolygon", 
@@ -37,7 +39,9 @@ const derry_donegal = {
             "GUID":"BCD3C654-AD8A-411B-BCD7-D2C210A9AB28",
             "CTY_ID":"55001",
             "Shape__Area":0.681172094599274,
-            "Shape__Length":18.3727691740416
+            "Shape__Length":18.3727691740416,
+            "POPULATION":159192,
+            AREA: "4,861 km²",
         },
         geometry:{
                 "type":"MultiPolygon",
