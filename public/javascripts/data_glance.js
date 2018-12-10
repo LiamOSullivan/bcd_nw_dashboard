@@ -37,12 +37,12 @@ function dataSets (data, columns){
 Promise.all([
     d3.csv("/data/landing_page/population_Age.csv"),
     d3.csv("data/landing_page/schools.csv"),
-    d3.csv("data/Housing/propertyprices.csv"),
+    d3.csv("data/landing_page/Population_Projections.csv"),
 ]).then( dataFiles => {
 
     const population_Age = dataFiles[0],
-          houseCompData = dataFiles[1],
-          priceList = dataFiles[2],
+          schools = dataFiles[1],
+          pop_proj = dataFiles[2],
 
           popV = population_Age.columns.slice(3),
           popDate = population_Age.columns[0],
@@ -55,19 +55,27 @@ Promise.all([
             return d.region === "DCSDC";
           }),
 
-          columnNames3 = houseCompData.columns.slice(2),
-          columnNames4 = priceList.columns.slice(2),
+          columnNames3 = schools.columns.slice(2),
+          columnNames4 = pop_proj.columns.slice(2),
 
-          xValue = houseCompData.columns[0],
+          xValue = schools.columns[0],
 
-          dataSet3 = dataSets(houseCompData, columnNames3),
-          dataSet4 = dataSets(priceList, columnNames4);
+          dataSet3 = dataSets(schools, columnNames3),
+          dataSet4 = dataSets(pop_proj, columnNames4),
+          dccPopProj = dataSet4.filter( d => {
+            return d.region === "Donegal"; }),
+          dcsdcPopProj = dataSet4.filter( d => {
+            return d.region === "DCSDC";
+          });
+
 
 
           population_Age.forEach( d => {
             d.date = d.year;
             d[popV] = +d[popV];
           });
+
+
 
           const popDCCData = nestData(popDCC, "year", popAgeK, popV);
           const popDCSDCData = nestData(popDCSDC, "year", popAgeK, popV);
@@ -80,17 +88,27 @@ Promise.all([
             return d.schools === "Secondary";
           });
 
-    // const pop =  {
-    //         d : dublinAnnualRate,
-    //         e : "#pr-glance",
-    //         yV: annualPopRate,
-    //         xV: "date",
-    //         sN: "region",
-    //         fV: d3.format(".2s"),
-    //         dL: "date"
-    //     },
+    const popdcsdc =  {
+            d : dcsdcPopProj,
+            e : "#pr-glance",
+            yV: columnNames4,
+            xV: "year",
+            sN: "region",
+            fV: d3.format(".2s"),
+            dL: "label"
+        },
+        popdcc =  {
+            d : dccPopProj,
+            e : "#dccpp-glance",
+            yV: columnNames4,
+            xV: "year",
+            sN: "region",
+            fV: d3.format(".2s"),
+            dL: "label"
+        },
         
-    //     popChart = new DataGlanceLine(pop);
+        dcsdcpopChart = new DataGlanceLine(popdcsdc);
+        dccpopChart = new DataGlanceLine(popdcc);
 
 
     const houseCompMonthly = new GroupedBarChart(primary, columnNames3, xValue, "#dcc-se-glance", "Units", "title2");
@@ -824,13 +842,13 @@ class StackBarChart {
         // create legend group
         let legend = dv.g.append("g")
         .attr("transform", "translate(0,0)");
-        
+        console.log(dv.columns)
         let legends = legend.selectAll(".legend")
-        .data(dv.columns.reverse())
+        .data(dv.columns)
         .enter().append("g")
             .attr("class", "legend")
             .attr("transform", (d, i) => {
-                return "translate(-1," + i * 30 + ")"; })
+                return "translate(-1," + (dv.height -31 * i) + ")"; })
             .style("font", "12px sans-serif");
         
         legends.append("rect")
@@ -838,16 +856,26 @@ class StackBarChart {
             .attr("x", dv.width + 18)
             .attr("width", 18)
             .attr("height", 18)
-            .attr("fill", dv.colour);
+                .attr("fill", d => {
+                    return dv.colour(d); 
+                    });
         
         legends.append("text")
             .attr("class", "legendText")
             .attr("x", dv.width + 44)
-            .attr("y", 9)
+            .attr("y", 6)
             .attr("dy", ".1rem")
             .attr("text-anchor", "start")
-            .text(d => { return d + " = " + d3.format(".2s")(vs[s][d]); });
+            .text(d => { return "Age: "+d; });
             // .call(dv.textWrap, 100, dv.width + 44);
+
+        legends.append("text")
+            .attr("class", "legendText")
+            .attr("x", dv.width + 44)
+            .attr("y", 18)
+            .attr("dy", ".1rem")
+            .attr("text-anchor", "start")
+            .text(d => { return "Population: " + d3.format(".2s")(vs[s][d]); });
     }
 }
 
