@@ -16,18 +16,26 @@ block content
               p.text-center.lead Tracking progress and performance across Donegal County Council (DCC) and Derry City & Strabane District Council (DCSDC).
           include component/carousel-charts.pug
           //- include component/searchbar.pug
-          include component/icon-nav.pug
+          //include component/icon-nav.pug
           //- include component/toggle-button.pug
 
   section.map
-    .content-wrapper.content-wrapper--darkblue
+    .content-wrapper.content-wrapper--blue
       .container
         include component/lp-map.pug
+
+  section.themes
+    .content-wrapper.content-wrapper--blue
+      .container
+        include themes/themes.pug
 
   //- include component/scroll-to-top
 
 block append scripts
-  script(src="lib/d3v5/d3.js")
+  script(src="lib/crossfilter.js" type="text/javascript")
+  script(src="lib/d3v5/d3.js" type="text/javascript")
+  script(src="lib/dc.js" type="text/javascript")
   script(src='javascripts/derry_donegal.js')
   script(src='javascripts/map.js')
-  script(src='javascripts/data_glance.js')
+  script(src='javascripts/data_glance.js') 
+  script(src='javascripts/themes/housing/house_prices.js')
