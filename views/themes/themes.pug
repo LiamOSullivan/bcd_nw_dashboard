@@ -14,6 +14,33 @@ block content
             | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             |Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             |nisi ut aliquip ex ea commodo consequat.
+    section#house-prices
+      article.header.mt-2.pt-5
+        .row
+          .col-md-4
+            h2.header__h1 House Prices
+            p House prices in the ROI are expressed in the first chart 
+              |as Residential Price Index (RPI). For the NI figures in the second 
+              |chart, the House Price Index (HPI) is used
+            //a(class="btn btn-bcd" href="themes/housing" role="button") View all Housing charts
+          .col-md-4
+            .row
+              #rpi-chart
+          .col-md-4
+            .row
+              #hpi-chart
+              
+              //.col-md-6.pt-5
+                div(class="card o-hidden border-blue")
+                  div(class="card-header" style="font-weigth: 600; background: none;") Average New Property Prices
+                  div(class="card__body card-graph")
+                    div(id="ap-glance")
+              //.col-md-6.pt-5
+                div(class="card o-hidden border-blue")
+                  div(class="card-header" style="font-weigth: 600; background: none;") Monthly House Unit Completions
+                  div(class="card__body card-graph")
+                    div(id="hc-glance")
+    
     section#transport
       article.header.mt-2.pt-5
         .row
@@ -54,28 +81,6 @@ block content
                 div(class="card__body card-graph")
                   div(id="test-glance")
 
-    section#housing
-      article.header.mt-2.pt-5
-        .row
-          .col-md-5
-            h1.header__h1 Housing
-            p.lead Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              |Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              |nisi ut aliquip ex ea commodo consequat.
-            //a(class="btn btn-bcd" href="themes/housing" role="button") View all Housing charts
-          .col-md-7
-            .row
-              .col-md-6.pt-5
-                div(class="card o-hidden border-blue")
-                  div(class="card-header" style="font-weigth: 600; background: none;") Average New Property Prices
-                  div(class="card__body card-graph")
-                    div(id="ap-glance")
-              .col-md-6.pt-5
-                div(class="card o-hidden border-blue")
-                  div(class="card-header" style="font-weigth: 600; background: none;") Monthly House Unit Completions
-                  div(class="card__body card-graph")
-                    div(id="hc-glance")
     section#education
       article.header.mt-2.pt-5
         .row
