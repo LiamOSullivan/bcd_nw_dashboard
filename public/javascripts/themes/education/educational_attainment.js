@@ -1,4 +1,4 @@
-let educationAttainmentChart = dc.rowChart("#education-chart-1");
+let educationAttainmentChart = dc.rowChart("#education-attainment-chart");
 d3.csv("../data/Demographics/educational_attainment.csv").then(function(data) {
   data.forEach(function(x) {
     x.Count = +x.Count;
