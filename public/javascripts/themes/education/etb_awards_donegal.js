@@ -2,66 +2,89 @@ d3.csv("../data/Education/etb_awards_donegal.csv").then(function(data) {
   //    console.log("data- \n" + data.length);
 
   data.forEach(function(d) {
-    d["QQI Level 4"] = +d["QQI Level 4"]; //we can add a more standardised property than the raw column names
-    d["QQI Level 5"] = +d["QQI Level 5"]; //note this adds more fields to the data
-    d["QQI Level 6"] = +d["QQI Level 6"];
-    d["Industry Awards Level 4"] = +d["Industry Awards Level 4"];
-    d["Industry Awards Level 5"] = +d["Industry Awards Level 5"];
-    d["Industry Awards Level 6"] = +d["Industry Awards Level 6"];
-    d["Leaving Certificate & LCA (Level 4 equivalency)"] = +d["Leaving Certificate & LCA (Level 4 equivalency)"];
-    d.Year = +d.Year
+    d.year = +d["Year"];
+    d.level = d["Level"];
+    d.count = +d["Count"];
   });
 
   console.log("\n\nawards data: \n" + JSON.stringify(data[0]));
 
   let ndx = crossfilter(data);
 
-  let yearDim = ndx.dimension(function(d) {
-    return d.Year;
+  let etbAwardsYearDim = ndx.dimension(function(d) {
+    return d.year;
   });
 
-  let qqi4_Group = yearDim.group().reduceSum(function(d) {
-    return d["QQI Level 4"];
+  let etbAwardsLevelDim = ndx.dimension(function(d) {
+    return d.level;
   });
 
-  let qqi5_Group = yearDim.group().reduceSum(function(d) {
-    return d["QQI Level 5"];
+  let etbAwardsCountGroup = etbAwardsYearDim.group().reduceSum(function(d) {
+    return d.count;
   });
 
-  let qqi6_Group = yearDim.group().reduceSum(function(d) {
-    return d["QQI Level 6"];
+  let qqi4_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "QQI Level 4") {
+      // console.log("\n\n***found 1*** \t" + JSON.stringify(d.Count) + "\n\n");
+      return d.count;
+    } else return 0;
   });
 
-  let ind4_Group = yearDim.group().reduceSum(function(d) {
-    return d["Industry Awards Level 4"];
+  let qqi5_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "QQI Level 5") {
+      return d.count;
+    } else return 0;
   });
 
-  let ind5_Group = yearDim.group().reduceSum(function(d) {
-    return d["Industry Awards Level 5"];
+  let qqi6_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "QQI Level 6") {
+      return d.count;
+    } else return 0;
   });
 
-  let ind6_Group = yearDim.group().reduceSum(function(d) {
-    return d["Industry Awards Level 6"];
+  let ind4_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "Industry Awards Level 4") {
+      return d.count;
+    } else return 0;
+  });
+
+  let ind5_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "Industry Awards Level 5") {
+      return d.count;
+    } else return 0;
+  });
+
+  let ind6_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "Industry Awards Level 6") {
+      return d.count;
+    } else return 0;
+  });
+
+  let other_Group = etbAwardsYearDim.group().reduceSum(function(d) {
+    if (d.level === "Leaving Certificate & LCA") {
+      return d.count;
+    } else return 0;
   });
 
   let etbAwardsChart = dc.lineChart("#etb-awards-donegal-chart");
 
   etbAwardsChart
-    .width(700)
+    .width(800)
     .height(300)
     .margins({
       left: 50,
       top: 20,
-      right: 150,
+      right: 250,
       bottom: 20
     })
-    .dimension(yearDim)
-    .group(qqi4_Group, 'QQI 4')
-    .stack(qqi5_Group, 'QI 5')
-    .stack(qqi6_Group, 'QI 6')
-    .stack(ind4_Group, 'Ind 4')
-    .stack(ind5_Group, 'Ind 5')
-    .stack(ind6_Group, 'Ind 6')
+    .dimension(etbAwardsYearDim)
+    .group(qqi4_Group, 'QQI Level 4')
+    .stack(qqi5_Group, 'QQI Level 5')
+    .stack(qqi6_Group, 'QQI Level 6')
+    .stack(ind4_Group, 'Industry Awards Level 4')
+    .stack(ind5_Group, 'Industry Awards Level 5')
+    .stack(ind6_Group, 'Industry Awards Level 6')
+    .stack(other_Group, 'Leaving Certificate & LCA')
     .transitionDuration(750);
   etbAwardsChart
     .x(d3.scaleLinear().domain([2014, 2017]))
@@ -75,28 +98,13 @@ d3.csv("../data/Education/etb_awards_donegal.csv").then(function(data) {
     .renderArea(true)
     .xyTipsOn(true);
 
-  etbAwardsChart.render();
-
-  //     .on('renderlet', function(chart) {
-  //       chart.selectAll('.dc-legend-item')
-  //         .on('click', function(d) {
-  //
-  //           var nme = d.name.toString();
-  //           //                    console.log("Click on legend: " + nme);
-  //           waitDim.filter(nme);
-  //           dc.redrawAll();
-  //         })
-  //     });
   // //                    customise colours used on stacked areas
   //   //TODO: use colorbrewer for safe colours
   //   timeLine.ordinalColors(['#f1eef6', '#d0d1e6', '#a6bddb', '#74a9cf', '#3690c0', '#0570b0', '#034e7b']);
   //
-  //   timeLine.title('0-3 Months', function(d) {
-  //     return d.key.getDate() + "-" +
-  //       (d.key.getMonth() + 1) + "-" +
-  //       d.key.getFullYear() +
-  //       "\n" + d.value + " patients waited 0-3 months";
-  //   });
+  // etbAwardsChart.title('QQI 4', function(d) {
+  //   return "test";
+  // });
   //   timeLine.title('3-6 Months', function(d) {
   //     return d.key.getDate() + "-" +
   //       (d.key.getMonth() + 1) + "-" +
@@ -134,24 +142,35 @@ d3.csv("../data/Education/etb_awards_donegal.csv").then(function(data) {
   //       "\n" + d.value + " patients waited 18+ months";
   //   });
   //   //                    interactive legend for each stack
-  //   timeLine.legend(dc.legend().x(705).y(60).itemHeight(25).gap(40).autoItemWidth(false));
-  //
-  //   //                    workaround to filter by legend click
+  etbAwardsChart.legend(dc.legend().x(600).y(50).itemHeight(15).gap(20).autoItemWidth(false));
 
   //
-  //   //                    workaround for inverting the legend stack layers
-  //   dc.override(timeLine, 'legendables', timeLine._legendables);
-  //
-  //   dc.override(timeLine, 'legendables', function() {
-  //     var legendables = this._legendables();
-  //     if (!this.dashStyle()) {
-  //       return legendables.reverse();
-  //     }
-  //     return legendables.map(function(l) {
-  //       l.dashstyle = this.dashStyle();
-  //       return l.reverse();
-  //     });
-  //   });
+  //   //                    workaround to filter by legend click
+  //workaround for inverting the legend stack layers
+  dc.override(etbAwardsChart, 'legendables', etbAwardsChart._legendables);
+
+  dc.override(etbAwardsChart, 'legendables', function() {
+    let legendables = this._legendables();
+    if (!this.dashStyle()) {
+      return legendables.reverse();
+    }
+    return legendables.map(function(l) {
+      l.dashstyle = this.dashStyle();
+      return l.reverse();
+    });
+  });
+  etbAwardsChart.render();
+
+  etbAwardsChart.on('renderlet', function(chart) {
+    chart.selectAll('.dc-legend-item')
+      .on('click', function(d) {
+        let n = d.name.toString();
+        console.log("Click on legend: " + n);
+        etbAwardsLevelDim.filter(n);
+        //dc.redrawAll();
+        etbAwardsChart.redraw();
+      })
+  });
   //
   //   select1
   //     .dimension(nameDim)

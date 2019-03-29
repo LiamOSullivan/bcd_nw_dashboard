@@ -1,5 +1,29 @@
-Year,QQI Level 4,QQI Level 5,QQI Level 6,Industry Awards Level 4,Industry Awards Level 5,Industry Awards Level 6,Leaving Certificate & LCA (Level 4 equivalency)
-2014,469,779,82,155,78,18,450
-2015,294,1474,92,142,85,17,267
-2016,655,2320,128,158,82,18,299
-2017,430,1191,35,112,56,,340
+Year,Level,Count
+2014,"QQI Level 4",469
+2014,"QQI Level 5",779
+2014,"QQI Level 6",82
+2014,"Industry Awards Level 4",155
+2014,"Industry Awards Level 5",78
+2014,"Industry Awards Level 6",18
+2014,"Leaving Certificate & LCA,450
+2015,"QQI Level 4",294
+2015,"QQI Level 5",1474
+2015,"QQI Level 6",92
+2015,"Industry Awards Level 4",142
+2015,"Industry Awards Level 5",85
+2015,"Industry Awards Level 6",17
+2015,"Leaving Certificate & LCA",267
+2016,"QQI Level 4",655
+2016,"QQI Level 5",2320
+2016,"QQI Level 6",128
+2016,"Industry Awards Level 4",158
+2016,"Industry Awards Level 5",82
+2016,"Industry Awards Level 6",18
+2016,"Leaving Certificate & LCA",299
+2017,"QQI Level 4",430
+2017,"QQI Level 5",1191
+2017,"QQI Level 6",35
+2017,"Industry Awards Level 4",112
+2017,"Industry Awards Level 5",56
+2017,"Industry Awards Level 6",
+2017,"Leaving Certificate & LCA",340
