@@ -4,7 +4,7 @@ d3.csv("../data/Demographics/uu_enrollments_2015.csv").then(function(data) {
   data.forEach(function(x) {
     x.Count = +x.Count;
   });
-  console.log("Edu UU enrollment data: " + data.length);
+  // console.log("Edu UU enrollment data: " + data.length);
 
   let ndx = crossfilter(data),
     subjectDimension = ndx.dimension(function(d) {
@@ -30,7 +30,7 @@ d3.csv("../data/Demographics/lit_enrollments_2015.csv").then(function(data) {
   data.forEach(function(x) {
     x.Count = +x.Count;
   });
-  console.log("Edu LIT enrollment data: " + data.length);
+  // console.log("Edu LIT enrollment data: " + data.length);
 
   let ndx = crossfilter(data),
     subjectDimension = ndx.dimension(function(d) {

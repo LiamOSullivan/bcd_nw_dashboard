@@ -1,7 +1,7 @@
 var schoolEnrollmentChart = dc.compositeChart("#education-chart-5");
 d3.csv("../data/Education/school_enrollments.csv").then(function(results) {
 
-  console.log("school enrollment data " + JSON.stringify(results[0]));
+  // console.log("school enrollment data " + JSON.stringify(results[0]));
   let ndx = crossfilter();
   ndx.add(results.map(function(d) {
     //D&S (16+),D&S (16-64 y.o.),Donegal (16+),Donegal (16-64 y.o.)

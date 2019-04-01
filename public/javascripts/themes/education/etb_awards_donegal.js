@@ -7,7 +7,7 @@ d3.csv("../data/Education/etb_awards_donegal.csv").then(function(data) {
     d.count = +d["Count"];
   });
 
-  console.log("\n\nawards data: \n" + JSON.stringify(data[0]));
+  // console.log("\n\nawards data: \n" + JSON.stringify(data[0]));
 
   let ndx = crossfilter(data);
 

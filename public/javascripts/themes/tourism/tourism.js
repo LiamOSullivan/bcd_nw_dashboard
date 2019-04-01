@@ -1,7 +1,7 @@
 var tourismChart = dc.barChart("#tourism-chart-1");
 d3.csv("../data/Tourism/tourism_numbers.csv").then(function(data) {
 
-  console.log("\n\n>>>tourism data: " + "\n" + JSON.stringify(data));
+  // console.log("\n\n>>>tourism data: " + "\n" + JSON.stringify(data));
   var ndx = crossfilter(data);
   var regionDim = ndx.dimension(function(d) {
     return d.Region;

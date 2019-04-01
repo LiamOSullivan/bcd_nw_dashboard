@@ -3,7 +3,7 @@ d3.csv("../data/Demographics/educational_attainment.csv").then(function(data) {
   data.forEach(function(x) {
     x.Count = +x.Count;
   });
-  console.log("Edu attainment data: " + data.length);
+  // console.log("Edu attainment data: " + data.length);
 
   let ndx = crossfilter(data),
     levelDimension = ndx.dimension(function(d) {

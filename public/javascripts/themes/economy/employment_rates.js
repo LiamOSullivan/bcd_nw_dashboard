@@ -1,7 +1,7 @@
 var eChart = dc.compositeChart("#employment-chart-1");
 d3.csv("../data/Economy/employment_rates.csv").then(function(results) {
 
-  console.log("employment data " + JSON.stringify(results[0]));
+  // console.log("employment data " + JSON.stringify(results[0]));
   let ndx = crossfilter();
   ndx.add(results.map(function(d) {
     //D&S (16+),D&S (16-64 y.o.),Donegal (16+),Donegal (16-64 y.o.)

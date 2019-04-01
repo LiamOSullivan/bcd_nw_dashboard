@@ -3,7 +3,7 @@ d3.csv("../data/Economy/emplyment_by_sector_all.csv").then(function(data) {
   data.forEach(function(x) {
     x.Count = +x.Count;
   });
-  console.log("Employ sector data: " + data.length);
+  // console.log("Employ sector data: " + data.length);
 
   let ndx = crossfilter(data),
     sectorDimension = ndx.dimension(function(d) {
