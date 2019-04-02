@@ -27,8 +27,8 @@ d3.csv("../data/Demographics/uu_enrollments_2015.csv").then(function(data) {
 
 let litChart = dc.rowChart("#education-chart-3");
 d3.csv("../data/Demographics/lit_enrollments_2015.csv").then(function(data) {
-  data.forEach(function(x) {
-    x.Count = +x.Count;
+  data.forEach(function(d) {
+    d["Letterkenny IT"] = +d["Letterkenny IT"];
   });
   // console.log("Edu LIT enrollment data: " + data.length);
 
@@ -37,7 +37,7 @@ d3.csv("../data/Demographics/lit_enrollments_2015.csv").then(function(data) {
       return d["Field of Study (ISCED)"];
     }),
     subjectGroup = subjectDimension.group().reduceSum(function(d) {
-      return +d.Count;
+      return d["Letterkenny IT"];
     });
   litChart
     .width(400)

@@ -3,6 +3,9 @@ extends layout
 block append head
   link(rel="stylesheet", href="/stylesheets/tabs.css")
   link(rel="stylesheet", href="/stylesheets/dc-chart.css")
+  //for dc addons
+  link(rel="stylesheet" href="lib/dc-tooltip-mixin.css")
+  link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.12/dc.css")
 
 block navigation
 
@@ -35,10 +38,13 @@ block content
 block append scripts
   script(src="lib/crossfilter.js" type="text/javascript")
   script(src="lib/d3v5/d3.js" type="text/javascript")
-  script(src="lib/dc.js" type="text/javascript")
+  //script(src='lib/d3-tip-master/index.js' type="text/javascript")
+  script(src="lib/dc.js" type="text/javascript") 
+  script(src="lib/dc-paired-row-chart.js" type="text/javascript")
+  script(src="lib/dc-tooltip-mixin.js" type="text/javascript")
   script(src='javascripts/derry_donegal.js')
   script(src='javascripts/map.js')
-  script(src='javascripts/data_glance.js') 
+  //script(src='javascripts/data_glance.js') 
   script(src='javascripts/themes/housing/house_prices.js')
   script(src='javascripts/themes/tourism/tourism.js')
   script(src='javascripts/themes/economy/employment_rates.js')
@@ -50,3 +56,4 @@ block append scripts
   script(src='javascripts/themes/education/etb_awards_donegal.js')
   script(src='javascripts/themes/economy/donegal_business_demography.js')
   script(src='javascripts/themes/demographics/population_composite.js')
+  script(src='javascripts/themes/demographics/population_bands.js')
