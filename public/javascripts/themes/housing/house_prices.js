@@ -1,15 +1,3 @@
-// let parseTime = d3.timeParse("%d/%m/%Y"),
-//   formatTime = d3.timeFormat("%d/%m/%Y"),
-//   formatYear = d3.timeFormat("%Y"),
-//   formatMonthYear = d3.timeFormat("%b-%Y"),
-//   parseMonth = d3.timeParse("%b-%y"),
-//   parseYearMonth = d3.timeParse("%Y-%b"), // ie Jan-14 = Wed Jan 01 2014 00:00:00 GMT+0000 (Greenwich Mean Time)
-//   parseYear = d3.timeParse("%Y");
-//
-// const getKeys = (d) => d.filter((e, p, a) => a.indexOf(e) === p);
-
-// let rpiChart = dc.compositeChart("#rpi-chart");
-
 var rpi = dc.compositeChart("#rpi-chart");
 d3.csv("../data/Housing/RPI.csv").then(function(results) {
   let ndx = crossfilter();
