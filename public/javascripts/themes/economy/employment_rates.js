@@ -17,7 +17,7 @@ d3.csv("../data/Economy/employment_rates.csv").then(function(results) {
   let dim = ndx.dimension(dc.pluck('x')),
     grp1 = dim.group().reduceSum(dc.pluck('y1')),
     grp2 = dim.group().reduceSum(dc.pluck('y2'));
-  grp3 = dim.group().reduceSum(dc.pluck('y3')),
+  let grp3 = dim.group().reduceSum(dc.pluck('y3')),
     grp4 = dim.group().reduceSum(dc.pluck('y4'));
   eChart
     .width(700)
