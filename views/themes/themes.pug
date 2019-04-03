@@ -24,11 +24,11 @@ block content
               |
 
           .col-md-8
-            <div class="btn-group d-flex">  
-              <button id="population-region-btn" class="btn btn-bcd-toggle btn-sm w-50 ml-1 mr-1 ">Regional</button>
-              <button id="population-national-btn" class="btn btn-bcd-toggle btn-sm w-50 ml-1 mr-1 active">National</button>
-            </div>
-            #pop-chart
+            //- <div class="btn-group d-flex">  
+            //-   <button id="population-region-btn" class="btn btn-bcd-toggle btn-sm w-50 ml-1 mr-1 ">Regional</button>
+            //-   <button id="population-national-btn" class="btn btn-bcd-toggle btn-sm w-50 ml-1 mr-1 active">National</button>
+            //- </div>
+            #pop-projection-chart
 
     section#population-bands
       article.header.mt-2.pt-5
@@ -57,11 +57,9 @@ block content
               |chart, the House Price Index (HPI) is used
 
           .col-md-4
-            .row
-              #rpi-chart
+            #houses-rpi-chart
           .col-md-4
-            .row
-              #hpi-chart
+            #houses-hpi-chart
 
     section#tourism
       article.header.mt-2.pt-5
@@ -87,7 +85,7 @@ block content
 
           .col-md-8
             .row
-              #employment-chart-1
+              #employment-rates-chart
 
     section#employment-sectors
       article.header.mt-2.pt-5
@@ -171,7 +169,7 @@ block content
 
           .col-md-8
             .row
-              #education-chart-5
+              #school-enrollments-chart
 
     section#he-enrollments
       article.header.mt-2.pt-5

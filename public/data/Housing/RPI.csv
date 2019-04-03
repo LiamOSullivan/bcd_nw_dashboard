@@ -1,13 +1,20 @@
-Year,Border Region (Excl. Louth),Ireland
-2005,0,105.9
-2006,0,122
-2007,0,131.5
-2008,0,123
-2009,0,100.9
-2010,91.3,88
-2011,76,73
-2012,64.2,63.4
-2013,58.9,64.1
-2014,60.4,74.3
-2015,62.9,82.8
-2016,70.2,88.9
+Year,Region,RPI
+2010,Border Region (Excl. Louth),91.3
+2011,Border Region (Excl. Louth),76
+2012,Border Region (Excl. Louth),64.2
+2013,Border Region (Excl. Louth),58.9
+2014,Border Region (Excl. Louth),60.4
+2015,Border Region (Excl. Louth),62.9
+2016,Border Region (Excl. Louth),70.2
+2005,Ireland,105.9
+2006,Ireland,122
+2007,Ireland,131.5
+2008,Ireland,123
+2009,Ireland,100.9
+2010,Ireland,88
+2011,Ireland,73
+2012,Ireland,63.4
+2013,Ireland,64.1
+2014,Ireland,74.3
+2015,Ireland,82.8
+2016,Ireland,88.9
