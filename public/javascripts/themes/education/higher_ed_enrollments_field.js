@@ -40,7 +40,7 @@ d3.csv("../data/Demographics/lit_enrollments_2015.csv").then(function(data) {
       return d["Letterkenny IT"];
     });
   litChart
-    .width(400)
+    .width(chartWidth)
     .height(300)
     .x(d3.scaleLinear().domain([0, chartUpper]))
     .elasticX(true)

@@ -63,20 +63,18 @@ d3.csv("../data/Demographics/population_projections.csv").then(function(data) {
   };
 
   let popProjectionData = [popProjROI, popProjNI, popProjDon, popProjDS];
-
-  let popProjectionlayout = {
-    title: 'Population Projections',
-    paper_bgcolor: '#001f35',
-    plot_bgcolor: '#001f35',
-    width: 700,
-    height: 400,
-    showlegend: true,
-    annotations: []
+  let popProjectionLayout = multilineChartLayout;
+  popProjectionLayout.title = 'Population Projections';
+  popProjectionLayout.legend = {
+    x: 1,
+    y: 0.5
   };
 
-  Plotly.newPlot('pop-projection-chart', popProjectionData, popProjectionlayout, {
-    modeBarButtonsToRemove: modeBarButtonsRemove,
+
+  Plotly.newPlot('pop-projection-chart', popProjectionData, popProjectionLayout, {
+    modeBarButtons: multilineModeBarButtonsInclude,
     displayModeBar: true,
+    displaylogo: false,
     showSendToCloud: false,
     responsive: true
   });

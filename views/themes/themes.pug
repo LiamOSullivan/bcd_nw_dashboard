@@ -17,99 +17,51 @@ block content
     section#population
       article.header.mt-2.pt-5
         .row
-          .col-md-4
-            h2.header__h1 Population Projections
-            p Lorem...
-              |
-              |
-
-          .col-md-8
-            //- <div class="btn-group d-flex">  
-            //-   <button id="population-region-btn" class="btn btn-bcd-toggle btn-sm w-50 ml-1 mr-1 ">Regional</button>
-            //-   <button id="population-national-btn" class="btn btn-bcd-toggle btn-sm w-50 ml-1 mr-1 active">National</button>
-            //- </div>
-            #pop-projection-chart
-
-    section#population-bands
-      article.header.mt-2.pt-5
+          .col-md-12
+            h2.header__h1 Population
         .row
-          .col-md-4
-            h2.header__h1 Population Bands
-            p Lorem...
-              |
-              |
-          .col-md-4
+          .col-md-6
+            #pop-projection-chart
+          .col-md-6
             #pop-bands-chart
-
-
-          //.col-md-4
-            #pop-bands-donegal-chart
-          //.col-md-4
-            #pop-bands-dcsdc-chart
 
     section#house-prices
       article.header.mt-2.pt-5
         .row
-          .col-md-4
+          .col-md-6
             h2.header__h1 House Prices
-            p House prices in the ROI are expressed in the first chart 
-              |as Residential Price Index (RPI). For the NI figures in the second 
-              |chart, the House Price Index (HPI) is used
-
-          .col-md-4
+            p House prices in the Republic of Ireland (ROI) are expressed in the first chart 
+              |as Residential Price Index (RPI). For Northern Ireland (NI), the figures in the second 
+              |chart use the House Price Index (HPI).
+        .row
+          .col-md-6
             #houses-rpi-chart
-          .col-md-4
+          .col-md-6
             #houses-hpi-chart
 
     section#tourism
       article.header.mt-2.pt-5
         .row
-          .col-md-4
+          .col-md-6
             h2.header__h1 Tourism
             p The chart shows the total numbers of overnight stays for DCSDC and 
               |NI, broken into the proportions of stays eminating from a variety of origins.
               |The figures are for 2016.
+        .row
+          .col-md-6
+            #tourism-chart
 
-          .col-md-8
-            .row
-              #tourism-chart-1
-
-    section#employment-rates
+    section#employment
       article.header.mt-2.pt-5
         .row
-          .col-md-4
-            h2.header__h1 Employment Rates
-            p The chart shows 
-              |
-              |
-
-          .col-md-8
-            .row
-              #employment-rates-chart
-
-    section#employment-sectors
-      article.header.mt-2.pt-5
+          .col-md-6
+            h2.header__h1 Employment
         .row
-          .col-md-4
-            h2.header__h1 Employment By Sector
-            p The chart shows 
-              |
-              |
-
-          .col-md-8
-            .row
-              #employment-chart-2
-
-
-    section#donegal-business
-      article.header.mt-2.pt-5
+          .col-md-12
+          #employment-sectors-chart
         .row
-          .col-md-4
-            h2.header__h1 Donegal Business Demography
-            p Business Demography by Year, Activity and Statistical Indicator 
-              |
-              |
-
+          .col-md-6
+            #employment-rates-chart
           .col-md-6
             <div class="btn-group d-flex">  
               <button id="donegal-business-active-btn" class="btn btn-bcd-toggle btn-sm w-75 ml-1 mr-1 active" value="dublinBikes">Active Enterprise</button>
@@ -124,7 +76,7 @@ block content
         .row
           .col-md-6
             h2.header__h1 Educational Attainment
-            strong.mb-5 Cross-border Level Classification
+            p Cross-border Level Classifications
             table.table-sm.table-hover.table-striped.table-bordered.table-responsive
               thead 
                 tr 
@@ -158,67 +110,21 @@ block content
             .row
               #education-attainment-chart
 
-    section#school-enrollments
+    section#enrollments
       article.header.mt-2.pt-5
         .row
-          .col-md-4
-            h2.header__h1 School Enrollments
-            p The chart shows student enrollments in schools in the North West City region, 
-              |for the years 2014-2016 inclusive.
-            p The figures are broken down by education level i.e. primary or secondary school.
-
-          .col-md-8
-            .row
-              #school-enrollments-chart
-
-    section#he-enrollments
-      article.header.mt-2.pt-5
+          .col-sm-12
+          h2.header__h1 Enrollments in Education
         .row
-          .col-md-4
-            h2.header__h1 Higher Education Enrollments
-            p The chart shows student enrollments in various thrid-level institutions in 2015.
-            table.table-sm.table-hover.table-striped.table-bordered
-              thead 
-                tr 
-                  th Abbreviation
-                  th Name  
-              tbody
-                tr
-                  td UU 
-                  td Ulster University
-                tr 
-                  td NWRC 
-                  td North-West ??
-                tr 
-                  td LIT 
-                  td Leterkenny Institute of Technology
-                tr
-                  td ETB	
-                  td Education Training Board
-                tr 
-                  td NRC	
-                  td ?               
-
-          .col-md-8
-            .row
-              #education-he-enrollment-chart
-
-      section#higher-education
-        article.header.mt-2.pt-5
-          .row
-            .col-md-4
-              h2.header__h1 Higher Education
-              p The charts show student enrollments in higher education for University of 
-                |Ulster and Letterkenny Instittue of Technology respectively.
-              p The figures are broken down by subject area/ field of study.
-                |
-
-            .col-md-4
-              .row
-                #education-chart-2
-            .col-md-4
-              .row
-                #education-chart-3
+          .col-md-6
+            #enrollments-school-chart
+          .col-md-6
+            #enrollments-higher-ed-chart
+        .row
+          .col-md-6
+            #enrollments-lit-chart
+          .col-md-6
+            #enrollments-uu-chart
 
       section#etb-awards-donegal
         article.header.mt-2.pt-5

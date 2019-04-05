@@ -54,20 +54,17 @@ d3.csv("../data/Demographics/population_age_profile.csv").then(function(data) {
   };
 
   let popBandsData = [donegalPopBands, dcsdcPopBands];
-  let popBandsLayout = {
-    barmode: 'group',
-    paper_bgcolor: '#001f35',
-    plot_bgcolor: '#001f35',
-    width: 700,
-    height: 300,
-    showlegend: true,
-    annotations: []
+  let popBandsLayout = groupedColumnLayout;
+  popBandsLayout.title = 'Population by Age Band';
+  popBandsLayout.legend = {
+    x: 1,
+    y: 0.5
   };
-
 
   Plotly.newPlot('pop-bands-chart', popBandsData, popBandsLayout, {
     modeBarButtonsToRemove: modeBarButtonsRemove,
     displayModeBar: true,
+    displaylogo: false,
     showSendToCloud: false,
     responsive: true
   });

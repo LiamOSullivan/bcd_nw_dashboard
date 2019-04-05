@@ -65,19 +65,17 @@ d3.csv("../data/Economy/employment_rates.csv").then(function(data) {
 
   let empRateData = [empRateDS1664, empRateDS16, empRateDon16, empRateDon1664];
 
-  let empRatelayout = {
-    title: 'Employment Rates',
-    paper_bgcolor: '#001f35',
-    plot_bgcolor: '#001f35',
-    width: 700,
-    height: 400,
-    showlegend: true,
-    annotations: []
+  let empRatelayout = multilineChartLayout;
+  empRatelayout.title = 'Employment Rates by Age Category';
+  empRatelayout.legend = {
+    x: 1,
+    y: 0.5
   };
 
   Plotly.newPlot('employment-rates-chart', empRateData, empRatelayout, {
     modeBarButtonsToRemove: modeBarButtonsRemove,
     displayModeBar: true,
+    displaylogo: false,
     showSendToCloud: false,
     responsive: true
   });

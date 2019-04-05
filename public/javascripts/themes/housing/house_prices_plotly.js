@@ -32,19 +32,17 @@ d3.csv("../data/Housing/HPI.csv").then(function(data) {
 
   let hpiData = [dscdcHpi, niHpi];
 
-  let hpiLayout = {
-    title: 'House Price Index (NI)',
-    paper_bgcolor: '#001f35',
-    plot_bgcolor: '#001f35',
-    width: houseChartWidth,
-    height: houseChartHeight,
-    showlegend: true,
-    annotations: []
+  let hpiLayout = multilineChartLayout;
+  hpiLayout.title = 'House Price Index (NI)';
+  hpiLayout.legend = {
+    x: 0.8,
+    y: 0.85
   };
 
   Plotly.newPlot('houses-hpi-chart', hpiData, hpiLayout, {
-    modeBarButtonsToRemove: modeBarButtonsRemove,
-    displayModeBar: true
+    modeBarButtons: multilineModeBarButtonsInclude,
+    displayModeBar: true,
+    displaylogo: false
   });
 
 });
@@ -52,6 +50,7 @@ d3.csv("../data/Housing/HPI.csv").then(function(data) {
 ////////////////////////////////////////////////////////////////////////////////
 
 d3.csv("../data/Housing/RPI.csv").then(function(data) {
+
   let borderRpiData = data.filter((v) => {
     return v.Region === "Border Region (Excl. Louth)";
   });
@@ -83,19 +82,16 @@ d3.csv("../data/Housing/RPI.csv").then(function(data) {
 
   let rpiData = [borderRpi, roiHpi];
 
-  let rpiLayout = {
-    title: 'Residential Price Index (RoI)',
-    paper_bgcolor: '#001f35',
-    plot_bgcolor: '#001f35',
-    width: houseChartWidth,
-    height: houseChartHeight,
-    showlegend: true,
-    annotations: []
+  let rpiLayout = multilineChartLayout;
+  rpiLayout.title = 'Residential Price Index (RoI)';
+  rpiLayout.legend = {
+    x: 0.6,
+    y: 0.85
   };
 
   Plotly.newPlot('houses-rpi-chart', rpiData, rpiLayout, {
-    modeBarButtonsToRemove: modeBarButtonsRemove,
-    displayModeBar: true
+    modeBarButtons: multilineModeBarButtonsInclude,
+    displayModeBar: true,
+    displaylogo: false
   });
-
 })
