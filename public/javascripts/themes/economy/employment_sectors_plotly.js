@@ -14,7 +14,7 @@ d3.csv("../data/Economy/employment_by_sector_all.csv").then(function(data) {
     name: 'Employment by Sector',
     orientation: 'h',
     type: 'bar',
-    mode: 'bars+text',
+    mode: 'bars+text'
     // text: ['test']
 
   };
@@ -22,7 +22,7 @@ d3.csv("../data/Economy/employment_by_sector_all.csv").then(function(data) {
   let employSectorLayout = rowChartLayout;
   employSectorLayout.title = 'Employment by Sector';
   employSectorLayout.height = 600;
-  employSectorLayout.width = 900;
+  employSectorLayout.width = 700;
   Plotly.newPlot('employment-sectors-chart', employSectorData, employSectorLayout, {
     modeBarButtons: rowChartModeBarButtonsInclude,
     displayModeBar: true,
