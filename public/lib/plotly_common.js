@@ -5,6 +5,9 @@ let rowChartModeBarButtonsInclude = [
 let multilineModeBarButtonsInclude = [
   ['toImage', 'hoverClosestCartesian', 'hoverCompareCartesian']
 ];
+let areaChartModeBarButtonsInclude = [
+  ['toImage', 'hoverClosestCartesian', 'hoverCompareCartesian']
+];
 //'hoverCompareCartesian'
 let chartWidth = 'inherit';
 let chartHeight = 475;
@@ -49,3 +52,15 @@ let multilineChartLayout = {
   annotations: [],
   hovermode: 'x'
 };
+
+let areaChartLayout = {
+  autosize: true,
+  yaxis: {
+    showticklabels: true
+  },
+  paper_bgcolor: '#001f35',
+  plot_bgcolor: '#001f35',
+  hovermode: 'x',
+  annotations: [],
+  showlegend: true
+}

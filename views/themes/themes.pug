@@ -57,19 +57,77 @@ block content
           .col-md-6
             h2.header__h1 Employment
         .row
-          .col-md-12
-            #employment-sectors-chart
-        .row
           .col-md-6
             #employment-rates-chart
+        .row
           .col-md-6
-            <div class="btn-group d-flex">  
-              <button id="donegal-business-active-btn" class="btn btn-bcd-toggle btn-sm w-75 ml-1 mr-1 active" value="dublinBikes">Active Enterprise</button>
-              <button id="donegal-business-persons-btn" class="btn btn-bcd-toggle btn-sm w-75 ml-1 mr-1 " value="dublinBuses">Persons Engaged</button>
-              <button id="donegal-business-employees-btn" class="btn btn-bcd-toggle btn-sm w-75 ml-1 mr-1 " value="dublinCarparks">Employees</button>
-              <button id="donegal-business-reset-btn" class="btn btn-sm w-75 ml-1 mr-1" value="reset">Reset</button>
-            </div>
-            #donegal-business-chart
+            #employment-sectors-chart
+    section#donegal-business
+      article.header.mt-2.pt-5
+        .row
+          .col-md-6
+            h2.header__h1 Donegal Business Demography
+        .row
+          .col-md-12
+            p The charts shows the breakdown of Donegal businesses by sector for the years 2008 to 2014. 
+             |You can select a particular variable from; Active Enterprise number, 
+             | number of Persons Engaged or the number of Employees. 
+             |The full names of each sector are provided in the table beneath the chart.
+        .row
+          .col-md-12
+             #donegal-business-chart
+        .row
+          .col-md-12
+            table.table-sm.table-hover.table-striped.table-bordered
+              thead 
+                tr 
+                  th Short Name
+                  th Full Name 
+                  th Short Name
+                  th Full Name 
+              tbody
+                tr 
+                  td Mining 
+                  td Mining and quarrying (B)
+                  td Manufacturing
+                  td Manufacturing (C)                   
+                tr 
+                  td Electricity
+                  td Electricity, gas, steam and air conditioning supply (D)
+                  td Water
+                  td Water supply, sewerage, waste management and remediation activities (E)
+                tr 
+                  td Construction 
+                  td Construction (F)
+                  td Motor
+                  td Wholesale and retail trade, repair of motor vehicles and motorcycles (G)
+                tr 
+                  td Transportation
+                  td Transportation and storage (H)
+                  td Accommodation
+                  td Accommodation and food service activities (I)
+                tr 
+                  td Information
+                  td Information and communication (J)
+                  td Financial 
+                  td Financial and insurance activities excluding activities of holding companies (K-642)
+                tr 
+                  td Real Estate
+                  td Real estate activities (L)
+                  td Technical
+                  td Professional, scientific and technical activities (M)
+                tr 
+                  td Administrative 
+                  td Administrative and support service activities (N)
+                  td Education
+                  td Education (P)
+                tr 
+                  td ICT
+                  td ICT services (261 to 264,268,465,582,61,62,631)
+                  td Business 
+                  td Business economy excluding activities of holding companies (B to N,-642)
+                
+        
 
     section#education
       article.header.mt-2.pt-5
@@ -131,7 +189,7 @@ block content
           .row
             .col-md-4
               h2.header__h1 Donegal ETB Awards
-              p The charts shows the number of awards at various accrediatation levels 
+              p The charts shows the numbers of awards at various accrediatation levels 
                 | under the Donegal Education and Training Board (ETB) for the years 2014 to 2017.
                 table.table-sm.table-hover.table-striped.table-bordered
                   thead 
@@ -139,17 +197,16 @@ block content
                       th Abbreviation
                       th Level  
                   tbody
-                    tr
-                      td QQI  
-                      td ???
                     tr 
                       td Ind 
                       td Industry Awards Level
+                    tr
+                      td QQI  
+                      td Quality & Qualificatons Ireland                    
                     tr 
                       td LC 
                       td Leaving Certificate & LCA (Level 4 equivalency)
 
 
             .col-md-8
-              .row
-                #etb-awards-donegal-chart
+              #donegal-etb-awards-chart
