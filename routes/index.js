@@ -5,8 +5,13 @@ var router = express.Router();
 // var qnq22_controller = require('../controllers/QNQ22Controller');
 
 /* GET home page. */
+
+//alternate prototype stylings rendering for NWD: index_grid_1,
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'North-West Dashboard', page:'index' });
+  res.render('index', {
+    title: 'North-West Dashboard',
+    page: 'index'
+  });
 });
 
 // // GET request for list of all Local Authorities Documents.
