@@ -1,7 +1,8 @@
 /* Base Styles */
 html {
   font-family: sans-serif;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.618;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
@@ -10,13 +11,15 @@ html {
 
 body {
   color: #f8f8f8;
-  background:var(--very-dark-blue); 
+  background:var(--dark-grey);
   position: relative;
+  font-family: 'PT Sans', sans-serif;
+  line-height: 1.618;
 }
 
 /* Links*/
 a {
-  color: var(--vivid-cyan); 
+  color: var(--vivid-cyan);
   /* text-decoration: none; */
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -27,12 +30,12 @@ a {
   transition: all 0.15s;
 }
 a:hover {
-  color: var(--vivid-cyan); 
+  color: var(--vivid-cyan);
   text-decoration: underline;
 }
 
 /* charts */
-.line-chart{
+/* .line-chart{
   margin-right:40px;
   width:100%
 }
@@ -81,12 +84,13 @@ a:hover {
 .no-axis text{
   fill: #f8f9fabd;
 }
+*/
 
-.horizontal-line{
+/* .horizontal-line{
   fill: none;
   shape-rendering: crispEdges;
   stroke: #6c757d;
-  /* stroke: #c4cdd5; */
+  //-stroke: #c4cdd5;
   stroke-width: 1;
 }
 
@@ -97,9 +101,10 @@ a:hover {
 .x-axis path, .x-axis line{
   stroke: #c4cdd5;
 }
-
+*/
+/*
 .x-axis text, .y-axis text{
-  /* fill: #6c757d; */
+  //- fill: #6c757d;
   fill: #c4cdd5;
 }
 
@@ -108,11 +113,12 @@ a:hover {
   fill: none;
   stroke-width: 2;
 }
+*/
 
 /* do we need this? */
-.collapse:not(.show) {
+/* .collapse:not(.show) {
   display: none;
-}
+} */
 
 /* this is used for the stories page it's a modifier for page title sections! */
 .bg-dark {
@@ -121,7 +127,7 @@ a:hover {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-}
+} */ */
 
 /* select formating */
 select {
@@ -141,11 +147,11 @@ select {
   transition-timing-function: cubic-bezier(.64,0,.35,1);
 }
 
-#data-text p{
+/* #data-text p{
   text-align: center;
   font-size: 1.125rem;
   margin-top: 1rem;
-}
+} */
 
 select:hover:not([disabled]) {
   border-color: transparent;
@@ -219,7 +225,7 @@ select:hover:not([disabled]) {
   border-color: #00c0f5;
 }
 
-#chart-employment .x-axis g.tick text{
+/* #chart-employment .x-axis g.tick text{
   display: none;
 }
 
@@ -231,15 +237,15 @@ select:hover:not([disabled]) {
   display: none;
 }
 
-#chart-trolleys .x-axis g.tick:nth-child(5n+1) text, 
+#chart-trolleys .x-axis g.tick:nth-child(5n+1) text,
 #chart-trolleys .x-axis g.tick:first-of-type text,
 #chart-trolleys .x-axis g.tick:last-of-type text {
   display: inline;
-}
+} */
 
-.bold-text{
+/* .bold-text{
   font-weight: 600;
-}
+} */
 
 /* from this https://css-tricks.com/introduction-reduced-motion-media-query/ */
 @media screen and (prefers-reduced-motion: reduce) {
