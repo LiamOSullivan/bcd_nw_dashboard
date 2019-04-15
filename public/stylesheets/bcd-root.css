@@ -1,5 +1,10 @@
 /* Root Variables */
 :root {
+  --dcc-red: #E31B23;
+  --dcc-tan: #CBB677;
+  --dcc-yellow: #FFEF00;
+  --dcc-green: #00A94F;
+  --dcsdc-light-blue: #278fb7; 
   --dark-grey: #313131;
   --white: #ffffff;
   --light-blue: #aae0fa;
@@ -23,5 +28,3 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-
-

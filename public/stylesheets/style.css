@@ -1,0 +1,325 @@
+/* Root Variables */
+:root {
+  --dcc-red: #E31B23;
+  --dcc-tan: #CBB677;
+  --dcc-yellow: #FFEF00;
+  --dcc-green: #00A94F;
+  --dcsdc-light-blue: #278fb7;
+  --dark-grey: #313131;
+  --white: #ffffff;
+  --light-blue: #aae0fa;
+  --teal: #00929e;
+  --yellow: #ffc20e;
+  --vivid-cyan: #16c1f3;
+  --vivid-red: #da1e4d;
+  --strong-blue: #086fb8;
+  --stronger-blue: #012e5f;
+  --dark-blue:#003d68;
+  --very-dark-blue:#001f35;
+  --black-blue:#021420;
+  --brown: #8c3529;
+  --soft-blue: #6f9ceb;
+  --grayish-blue: #6d7c8f;
+  --very-light-grey: #f8f8f8;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Base Styles */
+html {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.618;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  color: #f8f8f8;
+  background:var(--dark-grey);
+  position: relative;
+  font-family: 'PT Sans', sans-serif;
+  line-height: 1.618;
+}
+
+/* Links*/
+a {
+  color: var(--vivid-cyan);
+  /* text-decoration: none; */
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -moz-transition: all 0.15s;
+  -o-transition: all 0.15s;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+a:hover {
+  color: var(--vivid-cyan);
+  text-decoration: underline;
+}
+
+/* Global */
+.container{
+  width:80%;
+  margin:auto;
+  overflow:hidden;
+}
+
+/*Showcase*/
+#showcase {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    position: relative;
+    background: -webkit-linear-gradient(top, rgba(20, 27, 46, 0.98) 0%,rgba(20, 27, 46, 0) 10%,rgba(20, 27, 46, 0.14) 50%,#001f35 100%),
+                -webkit-linear-gradient(top, rgba(0,31,53,1) 0%, rgba(20, 27, 46, 0.39) 100%),
+                url('../images/dds.jpg') no-repeat center/cover;
+
+    padding-top: 1rem;
+    overflow-y: hidden;
+    text-align: center;
+}
+
+#showcase h1 {
+  font-size: 3rem;
+  margin-bottom: 5vh;
+  color: #fff;
+}
+
+#showcase p {
+  font-size: 1.5rem;
+  margin-bottom: 5vh;
+  color: #fff;
+}
+
+
+
+
+
+/* Boxes */
+#boxes{
+  margin-top:20px;
+}
+
+#boxes .box{
+  float:left;
+  text-align: center;
+  width:33%;
+  padding:0px;
+  border: 1px solid #666;
+}
+
+#boxes .box img{
+  width:90px;
+}
+
+
+path.domain{
+    display: none;
+}
+
+.content-wrapper--darkblue{
+    background: var(--very-dark-blue);
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+}
+
+.content-wrapper--blackblue{
+    background: var(--black-blue);
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+}
+/*
+.about__header{
+    font-size:2rem;
+    text-transform:uppercase;
+} */
+
+#region__total-population, #region__total-house, #region__total-vacant{
+    font-weight: 600;
+}
+
+#region__population, #region__house, #region__vacant, .map span{
+    font-weight: 600;
+}
+
+#local__title{
+    color:#f8f8f8;
+}
+
+#local__title__small, #local__open, #dublin-text p{
+    color: #f8f8f8;
+    /* font-weight: 100; */
+}
+
+.columns-2{
+    column-count: 2;
+}
+
+.about__dublin{
+    column-count: 2;
+}
+
+.local-on{
+    fill: #16c1f3;
+}
+
+.lp-map__compare{
+    visibility: hidden;
+}
+
+@media (min-width: 576px){
+    /* .hero__title{
+        font-size: 2.5rem;
+    }
+
+    .hero{
+        padding-top: 2rem;
+    } */
+}
+
+
+/* charts */
+/* .line-chart{
+  margin-right:40px;
+  width:100%
+}
+.line-chart:last-child{
+  margin-right:0
+}
+.line-chart path.activity{
+  stroke:#16c1f3;
+  stroke-width:4;
+  fill:none;
+}
+.line-chart .cursor{
+  fill:#fff;
+  stroke:#16c1f3;
+  stroke-width:2
+}
+.line-chart .label, .no-axis{
+  font-size: 14px;
+  font-weight:500;
+}
+.line-chart .label.today{
+  fill:#16c1f3;
+  text-anchor:start
+}
+.line-chart path.reference{
+  stroke:rgba(150,150,150,.3)
+}
+.line-chart path.today{
+  opacity:1
+}
+.line-chart .axis line,.line-chart .axis path{
+  fill:none;
+  stroke:rgba(0,0,0,.1);
+  stroke-width:1
+}
+.line-chart .y path{
+  stroke:none;
+  fill:none;
+  stroke-width:0
+}
+
+.no-axis path{
+  display: none;
+}
+
+.no-axis text{
+  fill: #f8f9fabd;
+}
+*/
+
+/* .horizontal-line{
+  fill: none;
+  shape-rendering: crispEdges;
+  stroke: #6c757d;
+  //-stroke: #c4cdd5;
+  stroke-width: 1;
+}
+
+.y-axis .domain, .y-axis .tick line {
+  display: none;
+}
+
+.x-axis path, .x-axis line{
+  stroke: #c4cdd5;
+}
+*/
+/*
+.x-axis text, .y-axis text{
+  //- fill: #6c757d;
+  fill: #c4cdd5;
+}
+
+.area-line {
+  shape-rendering: geometricPrecision;
+  fill: none;
+  stroke-width: 2;
+}
+*/
+
+/* do we need this? */
+/* .collapse:not(.show) {
+  display: none;
+} */
+
+/* this is used for the stories page it's a modifier for page title sections! */
+.bg-dark {
+  background-color: var(--very-dark-blue)!important;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+} */ */
+
+/* select formating */
+select {
+  width: 100%;
+  height:2rem;
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
+  border: .1rem solid #c4cdd5;
+  border-radius: .6rem;
+  line-height: 4.8rem;
+  font-size: .875rem;
+  color: #161d25;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 0.2rem rgba(92,106,196,0), inset 0 0.1rem 0.2rem 0 rgba(99,115,129,.2);
+  transition-property: border-color,box-shadow;
+  transition-duration: .24s;
+  transition-timing-function: cubic-bezier(.64,0,.35,1);
+}
+
+/* #data-text p{
+  text-align: center;
+  font-size: 1.125rem;
+  margin-top: 1rem;
+} */
+
+/* select:hover:not([disabled]) {
+  border-color: transparent;
+  box-shadow: inset 0 0 0 0.1rem #5c6ac4, inset 0 0.1rem 0.1rem 0 rgba(99,115,129,.2);
+} */
+
+/* charts styles */
+
+
+/* from this https://css-tricks.com/introduction-reduced-motion-media-query/ */
+/* @media screen and (prefers-reduced-motion: reduce) {
+.collape {
+  transition: none;
+}
+} */

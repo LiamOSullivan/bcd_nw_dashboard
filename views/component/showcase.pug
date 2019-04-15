@@ -1,0 +1,30 @@
+//- //- extends layout
+//- 
+//- //block navigation
+//- +navbar("navbar navbar-expand-lg navbar-dark bg-dark fixed-top","/","Dublin Dashboard", "Themes")
+
+block content
+  section#showcase
+    .container
+      h1 NORTH-WEST DASHBOARD
+      p Tracking progress and performance in the cross-border region, with data from 
+        b Donegal County Council (DCC) 
+        | and 
+        b Derry City & Strabane District Council (DCSDC)
+    #boxes
+      .container
+        .box
+          <i class="fas fa-users fa-5x"></i>
+          h3 Population
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+
+        .box
+          <i class="fas fa-chart-line fa-5x"></i>
+          h3 Economy
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+
+        .box
+          <i class="fas fa-city fa-5x"></i>
+          h3 Housing
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+      //- include carousel-charts.pug

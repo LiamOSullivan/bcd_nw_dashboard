@@ -1,11 +1,11 @@
 extends layout
 
 block append head
-  link(rel="stylesheet", href="/stylesheets/tabs.css")
-  link(rel="stylesheet", href="/stylesheets/landing-page.css")
-  //link(rel="stylesheet", href="/stylesheets/css-grid-1.css")
+  //- link(rel="stylesheet", href="/stylesheets/tabs.css")
+  link(rel="stylesheet", href="/stylesheets/style.css")
+  //- link(rel="stylesheet", href="/stylesheets/css-grid-1.css")
   //- link(rel="stylesheet", href="/stylesheets/dc-chart.css")
-  //for dc addons
+  //- for dc addons
   //- link(rel="stylesheet" href="lib/dc-tooltip-mixin.css")
   //- link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.12/dc.css")
 
@@ -13,19 +13,7 @@ block navigation
 
 block content
   section#showcase
-    .container
-      h1 NORTH-WEST DASHBOARD
-      p Tracking progress and performance across
-        br
-        b Donegal County Council 
-        //- |(DCC) 
-        |and 
-        b Derry City & Strabane District Council 
-        //- |(DCSDC).
-      //- include component/carousel-charts.pug
-        //- include component/searchbar.pug
-        //- include component/icon-nav.pug
-        //- include component/toggle-button.pug
+    include component/showcase.pug
 
   section.map
     .content-wrapper.content-wrapper--blue
