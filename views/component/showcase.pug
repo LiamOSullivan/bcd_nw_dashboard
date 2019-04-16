@@ -6,31 +6,53 @@
 block content
   #showcase
     .container
-      h1 NORTH-WEST DASHBOARD
-      p Tracking progress and performance in the cross-border region, with data from 
-        b Donegal County Council (DCC) 
-        | and 
-        b Derry City & Strabane District Council (DCSDC)
-    #boxes
-      .container
+      #header
+        h1 NORTH-WEST DASHBOARD
+        h2 Tracking progress and performance in the cross-border region, with data from 
+          br
+          b Donegal County Council (DCC) 
+          | and 
+          b Derry City & Strabane District Council (DCSDC)
+      #kpi-boxes
         .box
-          <i class="fas fa-users fa-5x"></i>
-          h3 Population
           p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-
+            |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
         .box
-          <i class="fas fa-chart-line fa-5x"></i>
-          h3 Economy
           p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-
+            |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
         .box
-          <i class="fas fa-city fa-5x"></i>
-          h3 Housing
           p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-      //- include carousel-charts.pug
+            |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+    
+        //- include carousel-charts.pug
+      
+      #nav-icons
+        .nav-icon
+          a(href='#population') 
+            i.fas.fa-users.fa-2x
+            br
+            | Population
+        .nav-icon
+          a(href='#employment') 
+            i.fas.fa-chart-line.fa-2x
+            br
+            | Economy
+        .nav-icon
+          a(href='#house-prices') 
+            i.fas.fa-city.fa-2x
+            br
+            | Housing
+        .nav-icon
+          a(href='#education') 
+            i.fas.fa-user-graduate.fa-2x
+            br
+            | Education
+        
 
-      #more
-        .container
-          #scroll-btn
-            <i class="fas fa-caret-down fa-3x"></i>
-            a(href="#about") Read more
+      #scroll-btn
+        a(href='#map') Read more
+          br
+          i.fas.fa-caret-down.fa-3x
+        //- <i class="fas fa-caret-down fa-3x"></i>
+        //- br
+        //- a(href="#map") Read more
