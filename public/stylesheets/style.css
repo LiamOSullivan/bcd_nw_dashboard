@@ -135,10 +135,12 @@ a:hover {
 }
 
 #nav-icons{
+  width: 50%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 25vh;
 }
 
@@ -158,8 +160,8 @@ a:hover {
   height: 10vh;
   width: 100px;
   left: 50%;
-  bottom: 1vh;
-  margin-left: -75px;
+  bottom: 0.5vh;
+  margin-left: -50px;
   position: absolute;
   text-align: center;
 }

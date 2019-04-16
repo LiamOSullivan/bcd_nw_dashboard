@@ -35,7 +35,7 @@ d3.csv("../data/Cultural_Services_and_Facilities.csv")
       // , {
       //   icon: waterLevelMapIcon
       // });
-      marker.bindPopup(d["NAME"]);
+      marker.bindPopup(d["NAME"] + "<br>" + d["TYPE"]);
       cultureMap.addLayer(marker);
     });
 
