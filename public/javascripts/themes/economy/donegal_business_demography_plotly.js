@@ -761,16 +761,26 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
         },
         showactive: true,
         type: 'buttons',
-        x: 0.5,
-        xanchor: 'center',
-        y: 1.1,
-        yanchor: 'top'
+        x: 1.0,
+        xanchor: 'right',
+        y: 1.05,
+        yanchor: 'bottom'
       }
 
     ];
 
     let donegalBusinessLayout = Object.assign({}, areaChartLayout);
-    donegalBusinessLayout.title = 'Donegal Business - Active Enterprise';
+    // donegalBusinessLayout.title.text = 'Donegal Business - Active Enterprise';
+
+    donegalBusinessLayout.title = {
+      text: 'Donegal Business - Active Enterprise',
+      font: {
+        family: 'PT Sans',
+        size: 28
+      },
+      xref: 'paper',
+      x: 0.0
+    };
     donegalBusinessLayout.hovermode = 'closest';
     donegalBusinessLayout.updatemenus = updateMenus;
 

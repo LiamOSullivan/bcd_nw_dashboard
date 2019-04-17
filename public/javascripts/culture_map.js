@@ -35,12 +35,19 @@ d3.csv("../data/Cultural_Services_and_Facilities.csv")
       // , {
       //   icon: waterLevelMapIcon
       // });
-      marker.bindPopup(d["NAME"] + "<br>" + d["TYPE"]);
+      marker.bindPopup(getPopupInfo(d));
       cultureMap.addLayer(marker);
     });
 
-    console.log("Mapped data " + JSON.stringify(cultureData[0]));
+    // console.log("Mapped data " + JSON.stringify(cultureData[0]));
 
+    function getPopupInfo(d_) {
+      return d_["NAME"] + "<br>" +
+        d_["TYPE"] + "<br>" +
+        d_["ADDRESS"] + "<br>" +
+        d_["WEB"] + "<br>";
+
+    }
 
     //
     // let dcsdcData = data.filter((v) => {

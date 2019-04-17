@@ -193,8 +193,8 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   /* grid-template-rows: repeat(24, 1fr); */
-  grid-auto-rows: 10vh;
-  grid-gap: 10px;
+  grid-auto-rows: 8vh;
+  grid-gap: 5px;
 /*   grid-auto-flow: dense; */
 
 }
@@ -202,18 +202,20 @@ a:hover {
 .chart-header {
   /* border: 1px solid black; */
   grid-column: span 12;
-  grid-row: span 1;
+  grid-row: span 2;
+  align-self: center;
 }
 
 .chart-regular {
   /* border: 1px solid black; */
   grid-column: span 9;
-  grid-row: span 5;
+  grid-row: span 4;
 }
 
 .chart-text{
   grid-column: span 3;
-  grid-row: span 5;
+  grid-row: span 4;
+  padding-right: 20px;
   align-self: center;
 }
 
@@ -226,12 +228,25 @@ a:hover {
     grid-row: span 2;
 }
 
-.chart-big {
-    grid-column: span 12;
-    grid-row: span 8;
+.chart-small {
+    grid-column: span 6;
+    grid-row: span 5;
 }
 
+.chart-big {
+    grid-column: span 12;
+    grid-row: span 7;
+}
 
+.chart-wide {
+    grid-column: span 12;
+    grid-row: span 4;
+}
+
+.chart-tall {
+    grid-column: span 12;
+    grid-row: span 5;
+}
 
 /* @media (max-width: 576px){
 
