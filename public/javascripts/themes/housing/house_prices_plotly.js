@@ -1,5 +1,3 @@
-let houseChartWidth = 425,
-  houseChartHeight = 300;
 d3.csv("../data/Housing/HPI.csv").then(function(data) {
   let dscdcHpiData = data.filter((v) => {
     return v.Region === "DCSDC";

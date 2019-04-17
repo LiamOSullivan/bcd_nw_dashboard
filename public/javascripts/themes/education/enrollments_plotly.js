@@ -32,9 +32,8 @@ d3.csv("../data/Education/school_enrollments.csv").then(function(data) {
 
   let schoolEnrollmentsData = [enrollmentPri, enrollmentSec];
 
-  let schoolEnrollmentslayout = rowChartLayout;
+  let schoolEnrollmentslayout = Object.assign({}, rowChartLayout);
   schoolEnrollmentslayout.title = 'School Enrollments, North West City Region';
-  schoolEnrollmentslayout.height = 475;
   Plotly.newPlot('enrollments-school-chart', schoolEnrollmentsData, schoolEnrollmentslayout, {
     modeBarButtons: multilineModeBarButtonsInclude,
     displaylogo: false,
@@ -62,9 +61,8 @@ d3.csv("../data/Education/higher_education_enrollments_2015.csv").then(function(
 
   };
   let enrollHigherData = [enrollHigher];
-  let enrollHigherLayout = rowChartLayout;
+  let enrollHigherLayout = Object.assign({}, rowChartLayout);
   enrollHigherLayout.title = "Higher Education Enrollments 2015 by Institution";
-  enrollHigherLayout.height = 475;
   Plotly.newPlot('enrollments-higher-ed-chart', enrollHigherData, enrollHigherLayout, {
     // clickMode: 'select',
     modeBarButtons: rowChartModeBarButtonsInclude,
@@ -109,8 +107,6 @@ d3.csv("../data/Education/lit_enrollments_2015.csv").then(function(data) {
     },
     paper_bgcolor: '#001f35',
     plot_bgcolor: '#001f35',
-    width: chartWidth,
-    height: 400,
     showlegend: false,
     annotations: []
   };
@@ -159,8 +155,6 @@ d3.csv("../data/Education/uu_enrollments_2015.csv").then(function(data) {
     },
     paper_bgcolor: '#001f35',
     plot_bgcolor: '#001f35',
-    width: chartWidth,
-    height: 400,
     showlegend: false,
     annotations: []
   };

@@ -71,6 +71,7 @@ a:hover {
 /* Global */
 .container{
   width:80%;
+  max-width: 1200px;
   margin: 12vh auto 0vh auto;
   overflow:hidden;
 }
@@ -175,6 +176,49 @@ a:hover {
   height: 600px;
 
 }
+
+/* Themes gridfor all charts*/
+.container-grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-gap: 10px;
+/*   grid-auto-flow: dense; */
+
+}
+
+.chart-header {
+  /* border: 1px solid black; */
+  grid-column: span 12;
+  grid-row: span 1;
+}
+
+.chart-regular {
+  /* border: 1px solid black; */
+  grid-column: span 9;
+  grid-row: span 5;
+}
+
+.chart-text{
+  grid-column: span 3;
+  grid-row: span 5;
+  align-self: center;
+}
+
+.chart-horizontal {
+  grid-column: span 12;
+
+}
+
+.chart-vertical {
+    grid-row: span 2;
+}
+
+.chart-big {
+    grid-column: span 12;
+    grid-row: span 8;
+}
+
 
 
 /* @media (max-width: 576px){

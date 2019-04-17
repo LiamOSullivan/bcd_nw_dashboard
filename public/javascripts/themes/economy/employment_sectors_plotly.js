@@ -22,8 +22,7 @@ d3.csv("../data/Economy/employment_by_sector_all.csv")
     let employSectorData = [employSector];
     let employSectorLayout = Object.assign({}, rowChartLayout);
     employSectorLayout.title = 'Employment by Sector';
-    employSectorLayout.height = 600;
-    employSectorLayout.width = 700;
+
     Plotly.newPlot('employment-sectors-chart', employSectorData, employSectorLayout, {
       modeBarButtons: rowChartModeBarButtonsInclude,
       displayModeBar: true,
