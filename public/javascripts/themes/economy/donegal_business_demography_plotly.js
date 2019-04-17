@@ -772,15 +772,13 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
     let donegalBusinessLayout = Object.assign({}, areaChartLayout);
     donegalBusinessLayout.title = 'Donegal Business - Active Enterprise';
     donegalBusinessLayout.hovermode = 'closest';
-    donegalBusinessLayout.height = 600;
     donegalBusinessLayout.updatemenus = updateMenus;
 
     Plotly.newPlot('donegal-business-chart', donegalBusinessTraces, donegalBusinessLayout, {
       modeBarButtons: areaChartModeBarButtonsInclude,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false,
-      responsive: true
+      showSendToCloud: false
     });
 
 

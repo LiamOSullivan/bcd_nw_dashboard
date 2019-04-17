@@ -1,8 +1,5 @@
 d3.csv("../data/Economy/tourism.csv").then(function(data) {
 
-  // console.log("Data " + JSON.stringify(data[0]));
-  // console.log("Keys: " + Object.keys(data[0]));
-
   let dcsdcTourismData = data.filter((v) => {
     return v.Region === "DCSDC";
   });
@@ -36,7 +33,7 @@ d3.csv("../data/Economy/tourism.csv").then(function(data) {
   };
 
   let tourismData = [dcsdcTourism, niTourism];
-  let tourismLayout = groupedColumnLayout;
+  let tourismLayout = Object.assign({}, groupedColumnLayout);
   tourismLayout.title = 'Tourism - Overnight Stays by Origin 2016';
   tourismLayout.legend = {
     x: 0.9,
@@ -47,8 +44,9 @@ d3.csv("../data/Economy/tourism.csv").then(function(data) {
     modeBarButtonsToRemove: modeBarButtonsRemove,
     displayModeBar: true,
     displaylogo: false,
-    showSendToCloud: false,
-    responsive: true
+    showSendToCloud: false
   });
 
+}).catch(function(err) {
+  console.log("Error loading file\n " + err)
 });

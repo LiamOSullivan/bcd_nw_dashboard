@@ -9,13 +9,22 @@ let areaChartModeBarButtonsInclude = [
   ['toImage', 'hoverClosestCartesian', 'hoverCompareCartesian']
 ];
 
+let chartFont = {
+  family: 'PT Sans',
+  size: 16,
+  color: '#313131'
+}
+
+let chartColor = '#ffffff';
+
 let rowChartLayout = {
   responsive: true,
   yaxis: {
     showticklabels: true
   },
-  paper_bgcolor: '#001f35',
-  plot_bgcolor: '#001f35',
+  paper_bgcolor: chartColor,
+  plot_bgcolor: chartColor,
+  font: chartFont,
   showlegend: false,
   annotations: [],
   hovermode: 'closest'
@@ -27,8 +36,9 @@ let groupedColumnLayout = {
   yaxis: {
     showticklabels: true
   },
-  paper_bgcolor: '#001f35',
-  plot_bgcolor: '#001f35',
+  paper_bgcolor: chartColor,
+  plot_bgcolor: chartColor,
+  font: chartFont,
   showlegend: true,
   annotations: [],
   hovermode: 'x'
@@ -40,12 +50,12 @@ let multilineChartLayout = {
   yaxis: {
     showticklabels: true
   },
-  paper_bgcolor: '#001f35',
-  plot_bgcolor: '#001f35',
+  paper_bgcolor: chartColor,
+  plot_bgcolor: chartColor,
+  font: chartFont,
   showlegend: true,
   annotations: [],
   hovermode: 'x'
-
 };
 
 let areaChartLayout = {
@@ -53,8 +63,9 @@ let areaChartLayout = {
   yaxis: {
     showticklabels: true
   },
-  paper_bgcolor: '#001f35',
-  plot_bgcolor: '#001f35',
+  paper_bgcolor: chartColor,
+  plot_bgcolor: chartColor,
+  font: chartFont,
   hovermode: 'x',
   annotations: [],
   showlegend: true

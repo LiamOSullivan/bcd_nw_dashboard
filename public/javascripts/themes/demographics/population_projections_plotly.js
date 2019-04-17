@@ -71,7 +71,6 @@ d3.csv("../data/Demographics/population_projections.csv")
       y: 0.5
     };
 
-
     Plotly.newPlot('pop-projection-chart', popProjectionData, popProjectionLayout, {
       modeBarButtons: multilineModeBarButtonsInclude,
       displayModeBar: true,

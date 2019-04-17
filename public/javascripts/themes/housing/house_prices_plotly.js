@@ -30,7 +30,7 @@ d3.csv("../data/Housing/HPI.csv").then(function(data) {
 
   let hpiData = [dscdcHpi, niHpi];
 
-  let hpiLayout = multilineChartLayout;
+  let hpiLayout = Object.assign({}, multilineChartLayout);
   hpiLayout.title = 'House Price Index (NI)';
   hpiLayout.legend = {
     x: 0.8,
@@ -79,8 +79,7 @@ d3.csv("../data/Housing/RPI.csv").then(function(data) {
   };
 
   let rpiData = [borderRpi, roiHpi];
-
-  let rpiLayout = multilineChartLayout;
+  let rpiLayout = Object.assign({}, multilineChartLayout);
   rpiLayout.title = 'Residential Price Index (RoI)';
   rpiLayout.legend = {
     x: 0.6,

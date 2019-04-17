@@ -1,5 +1,15 @@
 /* Root Variables */
 :root {
+/* http://colormind.io/template/paper-dashboard/ */
+  --ct-blue: #dcad55 ;
+  --ct-azure: #8495a1 ;
+  --ct-green: #77ae52 ;
+  --ct-orange: #f59e1a ;
+  --ct-red: #f44336 ;
+  --ct-heading-text: #9f9f9f;
+  --ct-text-primary: #dcad55; /*orange*/
+  --ct-main-background: #d8d8d8;
+
   --dcc-red: #E31B23;
   --dcc-tan: #CBB677;
   --dcc-yellow: #FFEF00;
@@ -41,8 +51,9 @@ html {
 }
 
 body {
-  color: #f8f8f8;
-  background:var(--dark-grey);
+  /* color: #f8f8f8; */
+  color: var(--dark-grey);
+  background:var(--ct-main-background);
   position: relative;
   font-family: 'PT Sans', sans-serif;
   line-height: 1.618;
@@ -181,7 +192,8 @@ a:hover {
 .container-grid{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  /* grid-template-rows: repeat(24, 1fr); */
+  grid-auto-rows: 10vh;
   grid-gap: 10px;
 /*   grid-auto-flow: dense; */
 
@@ -448,7 +460,7 @@ a:hover {
 
 /* this is used for the stories page it's a modifier for page title sections! */
 /* .bg-dark {
-  background-color: var(--very-dark-blue)!important;
+  background-color: var(--very-dark-blue);
   color: white;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
