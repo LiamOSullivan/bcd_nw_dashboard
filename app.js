@@ -10,11 +10,8 @@ var cron = require("node-cron");
 
 // get routes files
 var index = require('./routes/index');
-var themes = require('./routes/themes');
-var stories = require('./routes/stories');
+// var themes = require('./routes/themes');
 var tools = require('./routes/tools');
-var queries = require('./routes/queries');
-
 var app = express();
 
 //Set up mongoose connection
@@ -35,55 +32,57 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 logger.debug("Overriding 'Express' logger");
-app.use(morgan('combined', {"stream": logger.stream}));
+app.use(morgan('combined', {
+  "stream": logger.stream
+}));
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 console.log(__dirname);
 
 // point to the bootstrap and jquery files
 app.use('/javascripts/vendor/bootstrap/js', express.static(
-        path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'js')));
+  path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'js')));
 app.use('/stylesheets/bootstrap/css', express.static(
-        path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css')));
+  path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css')));
 app.use('/javascripts/vendor/jquery', express.static(
-        path.join(__dirname, 'node_modules', 'jquery', 'dist')));
+  path.join(__dirname, 'node_modules', 'jquery', 'dist')));
 app.use('/javascripts/vendor/popper.js', express.static(
-        path.join(__dirname, 'node_modules', 'popper.js', 'dist')));
+  path.join(__dirname, 'node_modules', 'popper.js', 'dist')));
 
 app.use('/', index);
-app.use('/themes', themes);
-app.use('/stories', stories);
+// app.use('/themes', themes);
 app.use('/tools', tools);
-app.use('/queries', queries);
-app.use('/api/themes', themes);
+// app.use('/api/themes', themes);
 
 ////additional fnctionality from node modules
 //var noUiSlider = require('nouislider');
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // adding winston logging for this error handler
-    logger.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+  // adding winston logging for this error handler
+  logger.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 /***TODO: Archive to db***/
-// //Car parks, traveltimes and bikes 
+// //Car parks, traveltimes and bikes
 // cron.schedule("*/2 * * * *", function () {
 //     let http = require('https');
 //     let fs = require('fs');
