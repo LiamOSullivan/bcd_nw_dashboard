@@ -716,7 +716,7 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
                 ]
               },
               {
-                'title': 'Donegal Business - Active Enterprise',
+                'title': 'Donegal Business by Sector - Active Enterprise',
                 // 'annotations': high_annotations
               }
             ],
@@ -731,7 +731,7 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
                 ]
               },
               {
-                'title': 'Donegal Business - Persons Engaged',
+                'title': 'Donegal Business by Sector - Persons Engaged',
                 // 'annotations': high_annotations
               }
             ],
@@ -746,7 +746,7 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
                 ]
               },
               {
-                'title': 'Donegal Business - Employees',
+                'title': 'Donegal Business by Sector- Employees',
                 // 'annotations': high_annotations
               }
             ],
@@ -761,9 +761,9 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
         },
         showactive: true,
         type: 'buttons',
-        x: 1.0,
-        xanchor: 'right',
-        y: 1.05,
+        x: 0.5,
+        xanchor: 'center',
+        y: 0.95,
         yanchor: 'bottom'
       }
 
@@ -773,14 +773,18 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
     // donegalBusinessLayout.title.text = 'Donegal Business - Active Enterprise';
 
     donegalBusinessLayout.title = {
-      text: 'Donegal Business - Active Enterprise',
+      text: 'Donegal Business by Sector - Active Enterprise',
+      xref: 'paper',
+      x: 0.5
+    };
+    donegalBusinessLayout.legend = {
       font: {
         family: 'PT Sans',
-        size: 28
-      },
-      xref: 'paper',
-      x: 0.0
+        size: 14,
+        color: '#313131'
+      }
     };
+
     donegalBusinessLayout.hovermode = 'closest';
     donegalBusinessLayout.updatemenus = updateMenus;
 

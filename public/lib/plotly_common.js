@@ -15,21 +15,20 @@ let chartFont = {
   color: '#313131'
 }
 
-let title = {
-  xref: 'paper',
-  x: 0.05,
-}
+// let chartColor = '#ffffff';
+let chartColor = '#d8d8d8'; //nearly same as background
 
-let chartColor = '#ffffff';
+// let colorWay = ['#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844'];
+// let colorWay = ['#e7a4b6', '#a262a9', '#6f4d96', '#182844'];
+let colorWay = ['#f4a582', '#f7f7f7', '#92c5de', '#0571b0'] //colorbrewer divergent
 
-let colorWay = ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844'];
 
 let margins = {
-  l: 50,
-  r: 50,
-  b: 50,
-  t: 75,
-  pad: 4
+  l: 40,
+  r: 40,
+  b: 40,
+  t: 60,
+  pad: 0
 };
 
 let rowChartLayout = {
