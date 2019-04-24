@@ -6,7 +6,7 @@ var morgan = require('morgan');
 var logger = require("./utils/logger");
 require('dotenv').config();
 
-var cron = require("node-cron");
+// var cron = require("node-cron");
 
 // get routes files
 var index = require('./routes/index');
