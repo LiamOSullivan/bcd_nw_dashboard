@@ -43,7 +43,8 @@
 /* Base Styles */
 html {
   font-family: sans-serif;
-  font-size: 16px;
+  /* fallback */
+  font-size: 20px;
   line-height: 1.618;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -53,16 +54,15 @@ html {
 
 body {
   /* color: #f8f8f8; */
-  color: var(--dark-grey);
+  /* color: var(--dark-grey); */
   background:var(--ct-main-background);
   position: relative;
   font-family: 'PT Sans', sans-serif;
-
 }
 
 /* text */
 h1, h2, h3, a, p {
-  color:#ffffff;
+  color: var(--dark-grey);
   text-decoration:none;
   text-transform: none;
   -webkit-font-smoothing: antialiased;
@@ -101,13 +101,10 @@ a:hover {
     text-shadow: 0 2px 12px black;
 }
 
-#showcase p {
-  font-size: 1.16vw;
-}
-
 #showcase h1 {
   /* font-size: 3rem; */
   font-size: 2.5vw;
+  color: #fff;
   margin-bottom: 2.5vw;
 
 }
@@ -115,9 +112,15 @@ a:hover {
 #showcase h2 {
   /* font-size: 1.5rem; */
   font-size: 1.25vw;
+  color: #fff;
   font-weight: 100;
   line-height: 1.618;
   margin-bottom: 1.25vw;
+}
+
+#showcase p, a {
+  font-size: 1vw;
+  color: #fff;
 }
 
 #header{
@@ -159,10 +162,6 @@ a:hover {
   /* border: 1px solid #666; */
 }
 
-#nav-icons .nav-icon a{
-  font-weight: 200;
-}
-
 #scroll-btn{
   /* display: block; */
   height: 10vh;
@@ -175,7 +174,7 @@ a:hover {
 }
 
 #scroll-btn a{
-  font-size: 12px;
+font-size: 1vw;
 }
 
 #about {

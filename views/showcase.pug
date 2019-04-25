@@ -4,59 +4,60 @@
 //- +navbar("navbar navbar-expand-lg navbar-dark bg-dark fixed-top","/","Dublin Dashboard", "Themes")
 
 block content
-    .container
-      #header
-        h1 NORTH-WEST DASHBOARD
-        h2 Tracking progress and performance in the cross-border region, with data from 
+  .container
+    #header
+      h1 NORTH-WEST DASHBOARD
+      h2 Tracking progress and performance in the cross-border region, with data from 
+        br
+        b Donegal County Council (DCC) 
+        | and 
+        b Derry City & Strabane District Council (DCSDC)
+    #kpi-boxes
+      .box
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+          |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+      .box
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+          |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+      .box
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+          |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
+
+      //- include carousel-charts.pug
+
+    #nav-icons
+      .nav-icon
+        a(href='#population') 
+          i.fas.fa-users.fa-2x
           br
-          b Donegal County Council (DCC) 
-          | and 
-          b Derry City & Strabane District Council (DCSDC)
-      #kpi-boxes
-        .box
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-            |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-        .box
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-            |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-        .box
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-            |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies
-
-        //- include carousel-charts.pug
-
-      #nav-icons
-        .nav-icon
-          a(href='#population') 
-            i.fas.fa-users.fa-2x
-            br
-            | Population
-        .nav-icon
-          a(href='#economy') 
-            i.fas.fa-chart-line.fa-2x
-            br
-            | Economy
-        .nav-icon
-          a(href='#housing') 
-            i.fas.fa-city.fa-2x
-            br
-            | Housing
-        .nav-icon
-          a(href='#education') 
-            i.fas.fa-user-graduate.fa-2x
-            br
-            | Education
-        .nav-icon
-          a(href='#maps') 
-            i.fas.fa-map.fa-2x
-            br
-            | Maps
-
-
-      #scroll-btn
-        a(href='#about') Read more
+          | Population
+      .nav-icon
+        a(href='#economy') 
+          i.fas.fa-chart-line.fa-2x
           br
-          i.fas.fa-caret-down.fa-3x
-        //- <i class="fas fa-caret-down fa-3x"></i>
-        //- br
-        //- a(href="#map") Read more
+          | Economy
+      .nav-icon
+        a(href='#housing') 
+          i.fas.fa-city.fa-2x
+          br
+          | Housing
+      .nav-icon
+        a(href='#education') 
+          i.fas.fa-user-graduate.fa-2x
+          br
+          | Education
+      .nav-icon
+        a(href='#maps') 
+          i.fas.fa-map.fa-2x
+          br
+          | Maps
+
+
+    #scroll-btn
+      a(href='#about')
+        |Read more
+        br
+        i.fas.fa-caret-down.fa-3x
+      //- <i class="fas fa-caret-down fa-3x"></i>
+      //- br
+      //- a(href="#map") Read more
