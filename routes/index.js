@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
+
 // // GET request for list of all Local Authorities Documents.
 // router.get('/authorities', authorities_controller.authorities_list);
 
