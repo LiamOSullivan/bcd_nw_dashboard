@@ -89,14 +89,15 @@ a:hover {
 
 /*Showcase*/
 #showcase {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     padding: 0px;
+    margin: 0px;
     position: relative;
     background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%),
                 url('../images/dds.jpg') no-repeat center/cover;
 
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     text-align: center;
     text-shadow: 0 2px 12px black;
     color: #fff;
@@ -301,15 +302,32 @@ a:hover {
 
 /* iPhone 6,7,8 */
 @media (max-width: 376px){
+
+  h1{
+     font-size: 8vw;
+     /* padding: 0vw 10vw; */
+     font-weight: 100;
+     line-height: 1.618;
+     color: #000;
+   }
+
+ h2, p, a {
+    font-size: 3.5vw;
+    font-weight: 100;
+    padding: 0vw;
+    line-height: 1.618;
+    color: #000;
+  }
+
   .container{
     width:100%;
-    height: 100vh;
     margin: 0;
     padding: 0;
     overflow-y: hidden;
   }
 
   #showcase {
+    height: 100vh;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(12, 1fr);
@@ -318,44 +336,34 @@ a:hover {
     align-items: top;
   }
 
-
-
   #header{
     grid-column: span 6;
     grid-row: 2 / 7;
     overflow-y: hidden;
-
-  }
-
-  #showcase h1, h2, p, a {
-    /* font-size: 3rem; */
-    /* font-size: 2.5vw; */
-    font-weight: 100;
-    line-height: 1.618;
-    color: #fff;
-
   }
 
   #showcase h1 {
+    color: #fff;
     font-size: 8vw;
     padding: 0vw 10vw;
-
   }
 
   #showcase p {
+    color: #fff;
     font-size: 3.5vw;
     font-weight: 100;
     padding: 0vw 10vw;
   }
 
   #showcase b {
+    color: #fff;
     font-weight: 600;
   }
 
   #showcase a {
+    color: #fff;
     font-size: 3.5vw;
     font-weight: 100;
-
   }
 
   /* Boxes */
@@ -411,7 +419,65 @@ a:hover {
     width: 10vw;
     height: 10vw;
     background-color: rgba(0,0,0,.1);
-}
+  }
+
+  #themes-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    /* grid-template-rows: repeat(3, 1fr); */
+    grid-gap: 5vw;
+    /*   grid-auto-flow: dense; */
+  }
+
+  .theme-section{
+    grid-column: 1 / span 1;
+    grid-template-columns: 1fr;
+    display: grid;
+    /* grid-auto-rows: auto; */
+    grid-gap: 5vw;
+  }
+
+  .theme-section:nth-child(even)
+  {
+      background-color: #d8d8d8;
+  }
+
+  .theme-section:nth-child(even)
+  {
+      background-color: var(--very-light-grey);
+  }
+
+  .chart-header {
+    /* border: 1px solid black; */
+    grid-column: span 1;
+    padding: 4vw 5vw;
+    margin: 0;
+    text-align: center;
+    }
+
+  .chart-header h1{
+    margin: 0;
+  }
+
+  .chart-text{
+    grid-column: span 1;
+    padding: 0vw 5vw;
+    text-align: left;
+  }
+
+  .chart-small, .chart-regular, .chart-big, .chart-wide  {
+    /* border: 2px solid black; */
+    grid-column: span 1;
+    height: 80vw; /*~square chart*/
+  }
+
+  #culture-map{
+    width: 100%;
+    height: 600px;
+
+  }
+
 
 
 /* path.domain{
