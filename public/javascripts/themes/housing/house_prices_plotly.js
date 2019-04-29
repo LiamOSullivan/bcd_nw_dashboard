@@ -40,7 +40,8 @@ d3.csv("../data/Housing/HPI.csv").then(function(data) {
   Plotly.newPlot('houses-hpi-chart', hpiData, hpiLayout, {
     modeBarButtons: multilineModeBarButtonsInclude,
     displayModeBar: true,
-    displaylogo: false
+    displaylogo: false,
+    responsive: true
   });
 
 });
@@ -89,6 +90,7 @@ d3.csv("../data/Housing/RPI.csv").then(function(data) {
   Plotly.newPlot('houses-rpi-chart', rpiData, rpiLayout, {
     modeBarButtons: multilineModeBarButtonsInclude,
     displayModeBar: true,
-    displaylogo: false
+    displaylogo: false,
+    responsive: true
   });
 })

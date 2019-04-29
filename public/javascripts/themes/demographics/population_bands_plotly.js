@@ -66,8 +66,8 @@ d3.csv("../data/Demographics/population_age_profile.csv")
       modeBarButtonsToRemove: modeBarButtonsRemove,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false
-
+      showSendToCloud: false,
+      responsive: true
     });
 
   })

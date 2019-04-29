@@ -28,7 +28,8 @@ d3.csv("../data/Economy/employment_by_sector_all.csv")
       modeBarButtons: rowChartModeBarButtonsInclude,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false
+      showSendToCloud: false,
+      responsive: true
 
     });
     //workaround to place y axis labels on bars

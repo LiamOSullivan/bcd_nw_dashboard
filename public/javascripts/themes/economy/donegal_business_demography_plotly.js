@@ -792,7 +792,8 @@ d3.csv("../data/Economy/donegal_business_demography_all.csv")
       modeBarButtons: areaChartModeBarButtonsInclude,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false
+      showSendToCloud: false,
+      responsive: true
     });
 
 

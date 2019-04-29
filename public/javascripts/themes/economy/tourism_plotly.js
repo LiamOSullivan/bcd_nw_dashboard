@@ -44,7 +44,8 @@ d3.csv("../data/Economy/tourism.csv").then(function(data) {
     modeBarButtonsToRemove: modeBarButtonsRemove,
     displayModeBar: true,
     displaylogo: false,
-    showSendToCloud: false
+    showSendToCloud: false,
+    responsive: true
   });
 
 }).catch(function(err) {

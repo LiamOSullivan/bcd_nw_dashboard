@@ -108,7 +108,8 @@ d3.csv("../data/Education/etb_awards_donegal.csv")
       modeBarButtons: areaChartModeBarButtonsInclude,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false
+      showSendToCloud: false,
+      responsive: true
     });
   })
   .catch(function(err) {

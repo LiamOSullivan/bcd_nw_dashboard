@@ -38,7 +38,8 @@ d3.csv("../data/Education/school_enrollments.csv")
     Plotly.newPlot('enrollments-school-chart', schoolEnrollmentsData, schoolEnrollmentslayout, {
       modeBarButtons: multilineModeBarButtonsInclude,
       displaylogo: false,
-      displayModeBar: true
+      displayModeBar: true,
+      responsive: true
     });
   });
 
@@ -70,7 +71,7 @@ d3.csv("../data/Education/higher_education_enrollments_2015.csv").then(function(
     displayModeBar: true,
     displaylogo: false,
     showSendToCloud: false,
-    responsive: true,
+    responsive: true
   });
   //workaround to place y axis labels on bars
   document.getElementById('enrollments-higher-ed-chart').on('plotly_afterplot', function() {

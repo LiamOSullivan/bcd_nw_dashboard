@@ -77,7 +77,8 @@ d3.csv("../data/Economy/employment_rates.csv")
       modeBarButtonsToRemove: modeBarButtonsRemove,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false
+      showSendToCloud: false,
+      responsive: true
     });
 
   }).catch(function(err) {

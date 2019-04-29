@@ -28,7 +28,8 @@ d3.csv("../data/Education/educational_attainment.csv")
       modeBarButtons: rowChartModeBarButtonsInclude,
       displayModeBar: true,
       displaylogo: false,
-      showSendToCloud: false
+      showSendToCloud: false,
+      responsive: true
     });
     //workaround to place y axis labels on bars
     document.getElementById('education-attainment-chart').on('plotly_afterplot', function() {
