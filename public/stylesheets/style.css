@@ -179,7 +179,6 @@ a:hover {
 
 #population-icon{
   grid-column: 2 / span 2;
-
 }
 
 #economy-icon{
@@ -319,9 +318,87 @@ font-size: 1vw;
 
 }
 
-/* nexus 10 */
-@media (max-width: 800px){
+/* iPhone 6,7,8 horizontal */
+@media (max-width: 668px) and (max-height: 376px) {
 
+  /* #showcase{
+    width: 100vw;
+    height: 100vh;
+
+  } */
+  .container{
+    width:100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+  }
+
+  #showcase-grid {
+      width: 80vw;
+      height: 100vh;
+      margin: auto;
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 40vh 35vh 20vh;
+      grid-gap: 0vw;
+      /* justify-content:center;*/
+      align-items: center;
+
+  }
+
+  #showcase h1 {
+    /* color: #fff; */
+    font-size: 5vw;
+    /* padding: 0vw 10vw; */
+  }
+
+  #showcase p, #showcase a {
+    /* color: #fff; */
+    font-size: 2vw;
+    /* font-weight: 100; */
+    /* padding: 0vw 10vw; */
+  }
+
+  #showcase b {
+    /* color: #fff;
+    font-weight: 600; */
+  }
+
+  #header{
+    grid-column: span 5;
+    overflow-y: hidden;
+    margin-top: 10vh;
+  }
+
+  /* Boxes */
+  #kpi-boxes{
+    display: none;
+  }
+
+  .nav-icon{
+    /* text-align: center;
+    padding: 10px; */
+  }
+
+  #population-icon{
+    grid-column: 1 / 2;
+  }
+
+  #economy-icon{
+    grid-column: 2 / 3;
+  }
+
+  #housing-icon{
+    grid-column: 3 / 4;
+  }
+
+  #education-icon{
+    grid-column: 4 / 5;
+  }
+
+  #maps-icon{
+   grid-column: 5 / 6;
+  }
 
 }
 
@@ -502,7 +579,7 @@ font-size: 1vw;
     height: 600px;
 
   }
-
+}
 
 
 /* path.domain{

@@ -8,7 +8,6 @@ d3.csv("../data/Education/school_enrollments.csv")
       return v.Level === "Secondary";
     });
 
-
     let enrollmentPri = {
       x: enrollmentPriData.map((v) => {
         return v.Year;
