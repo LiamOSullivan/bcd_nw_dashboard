@@ -400,13 +400,11 @@ h2, p, a {
   }
 
   #scroll-btn{
-grid-row: span 1;
-    align-self: center;
+    grid-row: span 1;
+    align-self: bottom;
     /* justify-self: center; */
 
   }
-
-
 }
 
 /********
@@ -416,7 +414,7 @@ Desktop
 
   .container{
     width:80%;
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 1vh auto 1vh auto; /*could use this to offset for navbar*/
     overflow:hidden;
   }
@@ -428,6 +426,8 @@ Desktop
     font-weight: 100;
     line-height: 1.618;
     color: #fff;
+    margin: 0;
+    padding: 0;
   }
 
   #showcase h1 {
@@ -435,14 +435,15 @@ Desktop
   }
 
   #showcase h2 {
-    /* font-size: 1.5rem; */
-    font-size: 1.25vw;
-    /* margin-bottom: 1.25vw; */ */
+    font-size: 2.5vw;
   }
 
-  #showcase p, a {
-    /* font-size: 1vw;
-    color: #fff; */
+  #showcase p {
+    font-size: 1.25vw;
+  }
+
+  #showcase a {
+    font-size: 1.25vw; /*affects font awesome links*/
   }
 
   #showcase-grid {
@@ -450,24 +451,24 @@ Desktop
       height: 100vh;
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: 25vh 35vh 20vh 10vh;
+      grid-template-rows: 35vh 35vh 20vh 10vh;
       grid-gap: 0vw;
-      /* justify-content:center;
-      align-items: top; */
-
+      /* justify-content:center;*/
   }
 
   #header{
     grid-column: span 12;
-    grid-template-rows: auto;
+    grid-row: 1 /span 1;
     align-self: center;
     /* grid-row: 2 / 7; */
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
+    padding: 10vh 0vw 0vh 0vw;
   }
 
   /* Boxes */
   #kpi-boxes{
     grid-column: span 12;
+    grid-row: span 1;
     /* margin-top:20px; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -480,40 +481,61 @@ Desktop
     text-align: center;
     align-self: center;
     padding: 1vw;
-    /* border: 1px solid #666; */
+
   }
 
   .nav-icon{
     text-align: center;
-    align-self: center;
-    justify-self: center;
+
+
 
   }
 
   #population-icon{
     grid-column: 2 / span 2;
+    grid-row: 3;
+    align-self: center;
+    justify-self: center;
   }
 
   #economy-icon{
+
     grid-column: 4 / span 2;
+    grid-row: 3;
+    align-self: center;
+    justify-self: center;
   }
 
   #housing-icon{
+
     grid-column: 6 / span 2;
+    grid-row: 3;
+    align-self: center;
+    justify-self: center;
   }
 
   #education-icon{
+
     grid-column: 8 / span 2;
+    grid-row: 3;
+    align-self: center;
+    justify-self: center;
   }
 
   #maps-icon{
+
    grid-column: 10 / span 2;
+   grid-row: 3;
+   align-self: center;
+   justify-self: center;
   }
 
 
   #scroll-btn{
     grid-column: span 12;
-    align-self: center;
+    grid-row: span 1;
+    align-self: bottom;
+    /* justify-self: center; */
   }
 
   #scroll-btn a{
@@ -543,6 +565,23 @@ Desktop
   #about-map-container {
    height: auto;
    width: 100%;
+  }
+
+  h1{
+     font-size: 3vw;
+     /* padding: 0vw 10vw; */
+     font-weight: 100;
+     line-height: 1.618;
+     color: #000;
+   }
+
+  h2, p, a {
+    font-size: 1vw;
+    font-weight: 100;
+    padding: 0;
+    margin: 0;
+    line-height: 1.618;
+    color: #000;
   }
 
   #themes{
@@ -586,23 +625,28 @@ Desktop
     grid-column: span 12;
     /* padding: 2vw 3vw; */
     margin: 0;
+    padding: 0;
     text-align: center;
-    }
+  }
 
   .chart-header h1{
-    margin: 2vw 0vw;;
+    margin: 0vw;
   }
 
   .chart-text{
     grid-column: span 4;
-    margin: 1vw 1vw 0vw 1vw;
+    margin: 0;
+    padding: 10px;
+    /* margin: 0vw 1vw 0vw 1vw; */
     text-align: left;
+    height: 400px;
   }
 
   .chart-small{
     /* border: 2px solid black; */
     grid-column: span 6;
     margin: 0vw 1vw 0vw 1vw;
+    height: 400px;
 
     /* height: 80vw; /*~square chart*/ */
   }
@@ -610,6 +654,7 @@ Desktop
     /* border: 2px solid black; */
     grid-column: span 8;
     margin: 0vw 1vw 0vw 1vw;
+    height: 400px;
     /* height: 80vw; /*~square chart*/ */
   }
 
@@ -617,6 +662,7 @@ Desktop
     /* border: 2px solid black; */
     grid-column: span 12;
     margin: 0vw 1vw 0vw 1vw;
+    height: 500px;
     /* height: 80vw; /*~square chart*/ */
   }
 
