@@ -1,0 +1,170 @@
+/*
+    Author     : Liam
+*/
+/*TODO use proper rules here instead of individual repetition*/
+/* .leaflet-popup-content {
+  width: 200px !important;
+  height: 150px !important;
+} */
+
+/* css to customize Leaflet default styles  */
+/* .custom .leaflet-popup-tip, */
+/*for charts in popoups*/
+
+/* .custom-popup .leaflet-popup-content-wrapper {
+  background:#2c3e50;
+  color:#fff;
+  font-size:16px;
+  line-height:24px;
+  border-radius: 0px;
+  }
+.custom-popup .leaflet-popup-content-wrapper a {
+    color:rgba(255,255,255,0.1);
+  }
+.custom-popup .leaflet-popup-tip-container {
+  width:30px;
+  height:15px;
+  }
+.custom-popup .leaflet-popup-tip {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  } */
+
+.bikesStationPopup .leaflet-popup-content-wrapper {
+    background: #001f35;
+}
+
+.bikesStationPopup .leaflet-popup-content {
+    color: #ffffff;
+    width: 250px !important;
+    height: 175px !important;
+    /* font-size:16px;
+    line-height:24px;
+    border-radius: 0px;
+    */
+
+    /* color:#fff; text colour */
+}
+
+.popup-error{
+  margin: 40px;
+
+}
+
+/* .dc-chart .axis {
+    display: none;
+
+} */
+/*
+.dc-chart .axis text {
+   font-size: 50px;
+  fill: #ffffff;
+}*/
+.dc-chart svg g g.axis.y {
+    display: none;
+}
+.dc-chart text {
+    fill: #ffffff;
+}
+
+/*//used for legend on the themes> transport map (bikes))*/
+.legend {
+    text-align: left;
+    line-height: 24px;
+    color: #555;
+    background-color:white;
+    padding:5px;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    width: 18px;
+    height: 18px;
+    clear:both;
+    float:right;
+
+}
+/*themes>transport>bikes>legend*/
+.info {
+    padding: 2px 8px;
+    /*//background: rgba(255,255,255,0.8);*/
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+
+
+#chart-water-map {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-sound-map {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-air-map {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-public-transport {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-private-transport {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-transport-bikes {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-transport-bus {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-transport-luas {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-transport-parking {
+    /*height: inherit;*/
+    height: 400px;
+    width: 100%;
+    margin: 20px;
+}
+
+#chart-environment-map {
+    /*height: inherit;*/
+    height: 500px;
+    width: 100%;
+    margin: 20px;
+}
