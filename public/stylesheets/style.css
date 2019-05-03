@@ -4,7 +4,7 @@
 --nw-bg:  #aae0fa ;
 --nw-theme-odd: #278fb7;
 --nw-theme-even: #00A94F;
---nw-chart: grey;
+--nw-chart: ;
 
 /* http://colormind.io/template/paper-dashboard/ */
   --ct-blue: #dcad55 ;
@@ -119,8 +119,10 @@ h2, p, a {
     padding: 0px;
     margin: 0px;
     position: relative;
+    /* background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%), */
+                /* url('../images/dds.jpg') no-repeat center/cover; */
     background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%),
-                url('../images/dds.jpg') no-repeat center/cover;
+                url('../images/CRW_3732_30.jpg') no-repeat top/cover;
 
     overflow-y: hidden;
     text-align: center;
@@ -291,11 +293,15 @@ h2, p, a {
 
 /* iPhone 6,7,8 horizontal */
 @media (min-width: 376px) and (max-height: 376px) {
-  /* #showcase{
-    width: 100vw;
-    height: 100vh;
 
-  } */
+
+  #showcase{
+    /* width: 100vw;
+    height: 100vh; */
+    background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%),
+                url('../images/CRW_3732_30.jpg') no-repeat top/cover;
+
+  }
   .container{
     width:100vw;
     margin: 0px;
@@ -411,6 +417,15 @@ h2, p, a {
 Desktop
 *********/
 @media (min-width: 1200px){
+
+
+    #showcase{
+      /* width: 100vw;
+      height: 100vh; */
+      background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%),
+                  url('../images/CRW_3732_30.jpg') no-repeat 0px -25px/cover;
+
+    }
 
   .container{
     width:80%;

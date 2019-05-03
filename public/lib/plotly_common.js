@@ -51,7 +51,15 @@ let groupedColumnLayout = {
   responsive: true,
   margin: margins,
   yaxis: {
-    showticklabels: true
+    3 we
+    autotick: true,
+    ticks: 'inside',
+    tickson: 'labels',
+    tick0: 0,
+    // dtick: 0.25,
+    ticklen: 8,
+    tickwidth: 2,
+    tickcolor: '#000'
   },
   paper_bgcolor: chartColor,
   plot_bgcolor: chartColor,
