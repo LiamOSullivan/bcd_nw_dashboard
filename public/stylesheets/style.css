@@ -52,6 +52,9 @@ html {
   /* fallback */
   font-size: 20px;
   line-height: 1.618;
+  overflow-y: scroll;
+  /*Check compatibility*/
+  scroll-behavior:smooth;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
@@ -64,6 +67,7 @@ body {
   background: var(--nw-bg);
   position: relative;
   font-family: 'PT Sans', sans-serif;
+
 }
 
 /* text */
