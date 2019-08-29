@@ -4,7 +4,6 @@
 --nw-bg:  #aae0fa ;
 --nw-theme-odd: #278fb7;
 --nw-theme-even: #00A94F;
---nw-chart: ;
 
 /* http://colormind.io/template/paper-dashboard/ */
   --ct-blue: #dcad55 ;
@@ -67,7 +66,6 @@ body {
   background: var(--nw-bg);
   position: relative;
   font-family: 'PT Sans', sans-serif;
-
 }
 
 /* text */
@@ -89,6 +87,11 @@ a:hover {
   text-decoration: none;
 }
 
+.container{
+  width:80%;
+  max-width: 1440px;
+  margin: 1vh auto 1vh auto; /*could use this to offset for navbar*/
+  overflow:hidden;
 nav .sidemenu {
   padding: 0px;
   margin: 0px;
@@ -123,10 +126,15 @@ h2, p, a {
     padding: 0px;
     margin: 0px;
     position: relative;
+<<<<<<< HEAD
+    background: -webkit-linear-gradient(top, rgba(49,49,49,0.8) 0%, rgba(49,49,49,0.6) 75%, rgba(49,49,49,1.0) 100%),
+                url('../images/statuesbr30r.jpg') no-repeat center/cover;
+=======
     /* background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%), */
                 /* url('../images/dds.jpg') no-repeat center/cover; */
     background: -webkit-linear-gradient(top, rgba(49,49,49,1) 0%, rgba(49,49,49,0.7) 75%, rgba(49,49,49,1.0) 100%),
                 url('../images/CRW_3732_30.jpg') no-repeat top/cover;
+>>>>>>> ed4ec1db866ef5d81ceff330241daae8ce28111f
 
     overflow-y: hidden;
     text-align: center;
