@@ -51,7 +51,6 @@ let groupedColumnLayout = {
   responsive: true,
   margin: margins,
   yaxis: {
-    3 we
     autotick: true,
     ticks: 'inside',
     tickson: 'labels',
