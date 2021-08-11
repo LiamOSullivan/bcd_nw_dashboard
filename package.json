@@ -24,7 +24,7 @@
     "node-cron": "^2.0.3",
     "nouislider": "^11.1.0",
     "popper.js": "^1.15.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "requirejs": "^2.3.6",
     "winston": "^3.2.1"
   },
